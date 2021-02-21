@@ -2,8 +2,6 @@
 // Name:         ceUDP.cpp
 // Description:  UDP communication module
 // Author:       Yan Naing Aye
-// Date:         2019 July 18
-// Last Modified: 2020 October 28
 // Ref: http://cool-emerald.blogspot.com/2018/01/udptcp-socket-programming-with-wxwidgets.html
 /////////////////////////////////////////////////////////////////////////////
 

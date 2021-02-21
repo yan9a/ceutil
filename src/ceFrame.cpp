@@ -2,7 +2,6 @@
 // Name:         ceFrame.cpp
 // Description:  Byte stuffing- sending and receiving frames
 // Author:       Yan Naing Aye
-// Date:         2019 November 19
 // Ref: http://cool-emerald.blogspot.com/2011/05/byte-stuffing.html
 /////////////////////////////////////////////////////////////////////////////
 #include<stdio.h>

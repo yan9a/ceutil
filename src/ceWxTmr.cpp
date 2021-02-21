@@ -2,7 +2,6 @@
 // Name:         ceWxTmr.cpp
 // Description:  Timer module
 // Author:       Yan Naing Aye
-// Date:         2019 September 10
 /////////////////////////////////////////////////////////////////////////////
 
 #include "ce/ceWxTmr.h"

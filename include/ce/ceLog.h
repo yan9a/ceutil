@@ -2,7 +2,6 @@
 // Name:         ceLog.h
 // Description:  logging module 
 // Author:       Yan Naing Aye
-// Date:         2019 July 22
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef ceLog_H

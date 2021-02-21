@@ -2,7 +2,6 @@
 // Name:         ceLog.cpp
 // Description:  logging module 
 // Author:       Yan Naing Aye
-// Date:         2019 July 22
 /////////////////////////////////////////////////////////////////////////////
 
 #include "ce/ceLog.h"

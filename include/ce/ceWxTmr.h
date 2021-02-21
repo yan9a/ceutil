@@ -2,8 +2,6 @@
 // Name:          ceWxTmr.h
 // Description:   Timer module
 // Author:        Yan Naing Aye
-// Date:          2019 September 10
-// Last modified: 2020 October 27
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef CEWXTMR_H

@@ -2,7 +2,6 @@
 // Name:         cePCA9535.h
 // Description:  cePCA9535 - Digital IO chip 
 // Author:       Yan Naing Aye
-// Date:         2020 October 31
 /////////////////////////////////////////////////////////////////////////////
 #include <cstdint>
 #include "ce/ceI2C.h"

@@ -2,7 +2,6 @@
 // Name:         ceUtil.h
 // Description:  CPP utilitiy modules 
 // Author:       Yan Naing Aye
-// Date:         2020 Oct 23
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef CE_UTIL_H

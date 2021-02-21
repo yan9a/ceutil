@@ -2,8 +2,6 @@
 // Name:         ceMisc.h
 // Description:  utility module
 // Author:       Yan Naing Aye
-// Date:         2019 July 25
-// Last Modified: 2020 October 29
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef CEMISC_H
@@ -24,6 +22,14 @@ public:
 	static std::string alnum(std::string str); // filter the string for alphanumeric characters only
 	static std::vector<char> hex2cvec(std::string str); // convert hex string to char vector
 	static std::string cvec2hex(std::vector<char> bv); // convert char vector to hex string	
+
+	static std::string ToStr16(unsigned int u);// to hexadecimal string
+	static std::string ToStr16(int u);// to hexadecimal string
+	static std::string ToStr16(unsigned char c);// to hexadecimal string
+	static std::string ToStr16(char c);// to hexadecimal string
+	static std::string ToStr16(std::vector<char> bv, std::string separator = "", std::string prefix = "", std::string postfix = "");// to hexadecimal string
+	static std::string ToStr16(std::vector<unsigned char> bv, std::string separator = "", std::string prefix = "", std::string postfix = "");// to hexadecimal string
+	
 	static std::string cvec2str(std::vector<char> bv); // convert char vector to string
 	static std::vector<char> cptr2cvec(char* cstr, int n); // char* to char vector	
 	static std::string cptr2str(char* cstr, int n); // convert char* to string
@@ -37,5 +43,6 @@ public:
 	// static wxImage wx_from_mat(Mat &img);
 	// static Mat mat_from_wx(wxImage &wx);
 };
+
 } // namespace ce
 #endif // CEMISC_H

@@ -2,7 +2,6 @@
 // Name:         cePCA9535.cpp
 // Description:  cePCA9535 - Digital IO chip
 // Author:       Yan Naing Aye
-// Date:         2019 October 09
 /////////////////////////////////////////////////////////////////////////////
 #include "ce/cePCA9535.h"
 

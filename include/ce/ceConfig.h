@@ -2,7 +2,6 @@
 // Name:         ceConfig.h
 // Description:  Configuration module for Dagger
 // Author:       Yan Naing Aye
-// Date:         2020 Nov 4
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef CECONFIG_H
@@ -41,6 +40,11 @@ public:
 	template <typename T>
 	static T Validate(T value,T min_val,T max_val,T default_val);		
 	Json::Value GetJson();
+	static Json::Value GetJson(std::string jstr);
+	static Json::Value ReadJson(std::string path);
+	static int WriteJson(Json::Value obj, std::string path);
+	static std::string ToString(Json::Value obj);
+	int SaveJson(Json::Value obj);
 private:
 	std::string m_path;
 };

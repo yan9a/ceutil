@@ -2,8 +2,6 @@
 // Name:         ceMisc.cpp
 // Description:  utility module
 // Author:       Yan Naing Aye
-// Date:         2019 July 25
-// Last Modified: 2020 October 29
 /////////////////////////////////////////////////////////////////////////////
 #include "ce/ceMisc.h"
 using namespace std;
@@ -24,11 +22,53 @@ string ceMisc::alnum(string str)
 vector<char> ceMisc::hex2cvec(string str)
 {
 	vector<char> v;
-
+	str = ceMisc::alnum(str);// filter for alphanumeric characters
 	int n = str.length();
 	for (int i = 0; i < n; i += 2) 
 		v.push_back((char)stoi(str.substr(i, 2), NULL, 16));
 	return v;
+}
+
+// convert to hexadecimal string 
+std::string ceMisc::ToStr16(unsigned int u)
+{
+	ostringstream ss;
+	ss << setfill('0') << setw(2) << uppercase << hex << u << " ";
+	return ss.str();
+}
+
+std::string ceMisc::ToStr16(int i)
+{
+	return ceMisc::ToStr16((unsigned int)i);
+}
+
+std::string ceMisc::ToStr16(unsigned char c)
+{
+	return ceMisc::ToStr16(c);
+}
+
+std::string ceMisc::ToStr16(char c)
+{
+	return ceMisc::ToStr16((unsigned char)c);
+}
+
+// convert vector to hexadecimal string
+std::string ceMisc::ToStr16(std::vector<char> bv, std::string separator, std::string prefix, std::string postfix) {
+	std::vector<unsigned char> uv(bv.begin(), bv.end());
+	return ceMisc::ToStr16(uv,separator,prefix,postfix);
+}
+
+// convert vector to hexadecimal string
+std::string ceMisc::ToStr16(std::vector<unsigned char> bv, std::string separator, std::string prefix, std::string postfix) {
+	ostringstream ss;
+	unsigned int u;
+	for (auto& c : bv) {
+		u = (unsigned char)c;
+		ss << prefix;
+		ss << setfill('0') << setw(2) << uppercase << hex << u << postfix;
+		if (&c != &bv.back()) ss << separator;
+	}
+	return ss.str();
 }
 
 // convert char vector to hex string

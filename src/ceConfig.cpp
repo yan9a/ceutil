@@ -2,7 +2,6 @@
 // Name:         ceConfig.cpp
 // Description:  Configuration module 
 // Author:       Yan Naing Aye
-// Date:         2019 July 22
 /////////////////////////////////////////////////////////////////////////////
 
 #include "ce/ceConfig.h"
@@ -26,18 +25,27 @@ ceConfig::~ceConfig()
 
 Json::Value ceConfig::GetJson()
 {
-	stringstream ss;	
+	return ReadJson(this->m_path);
+}
+
+Json::Value ceConfig::ReadJson(std::string path)
+{
+	string document = ceConfig::ReadFile(path);
+	return ceConfig::GetJson(document);
+}
+
+Json::Value ceConfig::GetJson(std::string jstr)
+{
+	stringstream ss;
 	Json::CharReaderBuilder reader;
 	Json::Value obj;
 	string errs;
-	string document;
-	document = ReadFile(m_path);
-	ss.str(document);
+	ss.str(jstr);
 	if (Json::parseFromStream(reader, ss, &obj, &errs)) {
-		printf("ceConfig parsing %s OK\n",m_path.c_str());
+		//printf("Parsing json string OK\n");
 	}
 	else {
-		perror("ceConfig error in parsing\n");
+		perror("Error in json parsing\n");
 	}
 	return obj;
 }
@@ -56,7 +64,7 @@ string ceConfig::ReadFile(string path)
 		}
 	}
 	catch(...){
-		perror("ceConfig error in reading\n");
+		perror("Error in reading json file\n");
 	}
     return sstr;
 }
@@ -74,9 +82,27 @@ int ceConfig::WriteFile(string path,string str)
 		wfile.close();
 	}
 	catch(...){
-		perror("ceConfig error in writing\n");
+		perror("Error in json file writing\n");
 	}
     return r;
+}
+
+int ceConfig::WriteJson(Json::Value obj, std::string path)
+{
+	string str = ceConfig::ToString(obj);
+	return ceConfig::WriteFile(path,str);
+}
+
+std::string ceConfig::ToString(Json::Value obj)
+{
+	stringstream ss;
+	ss << obj;
+	return ss.str();
+}
+
+int ceConfig::SaveJson(Json::Value obj)
+{
+	return ceConfig::WriteJson(obj, this->m_path);
 }
 
 } // namespace ce 

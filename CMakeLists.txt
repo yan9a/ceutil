@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project (ceUtil)
+# set(CMAKE_CXX_STANDARD 11)
 # set(CMAKE_BUILD_TYPE Release)
 message(STATUS "Base dir = ${CMAKE_SOURCE_DIR}")
 find_package(wxWidgets COMPONENTS core net base REQUIRED)
