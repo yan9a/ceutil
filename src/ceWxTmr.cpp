@@ -5,6 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "ce/ceWxTmr.h"
+#if CE_WX==1
 #include<vector>
 using namespace std;
 namespace ce {
@@ -31,3 +32,4 @@ void ceWxTmr::Start()
 }
 
 } // namespace ce 
+#endif // CE_WX

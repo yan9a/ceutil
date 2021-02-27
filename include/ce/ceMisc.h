@@ -13,8 +13,13 @@
 #include <vector>
 #include <sstream>
 #include <iomanip>
-// #include <wx/wx.h>
-
+#include "ceMacros.h" // macros
+#if CE_WX==1
+#include "wx/wx.h"
+#endif // CE_WX
+#if CE_CV==1
+#include <opencv2/opencv.hpp>
+#endif // CE_WX
 namespace ce {
 class ceMisc {
 private:
@@ -37,11 +42,14 @@ public:
 	static std::vector<char> str2cvec(std::string str); // string to char vector
 	static std::string f2s(float f, int n = 1); // float to string
 	static std::vector<std::string> splitStr(std::string str, std::string delimiter);
-
+#if CE_WX==1
 	// wxWidgets
-	// static void printTime();
-	// static wxImage wx_from_mat(Mat &img);
-	// static Mat mat_from_wx(wxImage &wx);
+	 static void printTime();
+#if CE_CV==1
+	 static wxImage wx_from_mat(cv::Mat &img);
+	 static cv::Mat mat_from_wx(wxImage &wx);
+#endif // CE_CV
+#endif // CE_WX
 };
 
 } // namespace ce

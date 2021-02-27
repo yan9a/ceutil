@@ -9,14 +9,9 @@
 #ifndef CEI2C_H
 #define CEI2C_H
 
-#if defined(_WIN64) || defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__WINDOWS__) || defined(__TOS_WIN__)
-    #ifndef CE_WINDOWS
-        #define CE_WINDOWS
-    #endif
-#else
-    #ifndef CE_LINUX
-        #define CE_LINUX
-    #endif
+#include "ceMacros.h" // macros
+
+#ifdef CE_LINUX
     #include <unistd.h>
     #include <linux/i2c-dev.h>
     #include <sys/ioctl.h>

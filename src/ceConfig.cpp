@@ -23,6 +23,44 @@ ceConfig::~ceConfig()
 
 }
 
+string ceConfig::ReadFile(string path)
+{
+	string sstr = "", tstr = "";
+	ifstream mys;
+	try {
+		mys.open(path.c_str());
+		if (mys.is_open()) {
+			while (getline(mys, tstr)) {
+				sstr += tstr;
+			}
+			mys.close();
+		}
+	}
+	catch (...) {
+		perror("Error in reading json file\n");
+	}
+	return sstr;
+}
+
+int ceConfig::WriteFile(string path, string str)
+{
+	ofstream wfile;
+	int r = -1;
+	try {
+		wfile.open(path.c_str());
+		if (wfile.is_open()) {
+			wfile << str;
+			r = 0;
+		}
+		wfile.close();
+	}
+	catch (...) {
+		perror("Error in json file writing\n");
+	}
+	return r;
+}
+
+#if CE_JSON==1
 Json::Value ceConfig::GetJson()
 {
 	return ReadJson(this->m_path);
@@ -50,43 +88,6 @@ Json::Value ceConfig::GetJson(std::string jstr)
 	return obj;
 }
 
-string ceConfig::ReadFile(string path)
-{
-    string sstr = "", tstr = "";
-    ifstream mys;
-	try{
-		mys.open(path.c_str());
-		if (mys.is_open()) {
-			while (getline(mys, tstr)) {
-				sstr += tstr;
-			}
-			mys.close();
-		}
-	}
-	catch(...){
-		perror("Error in reading json file\n");
-	}
-    return sstr;
-}
-
-int ceConfig::WriteFile(string path,string str)
-{
-    ofstream wfile;
-    int r=-1;
-	try{
-		wfile.open(path.c_str());
-		if (wfile.is_open()) {
-			wfile << str;
-			r=0;
-		}
-		wfile.close();
-	}
-	catch(...){
-		perror("Error in json file writing\n");
-	}
-    return r;
-}
-
 int ceConfig::WriteJson(Json::Value obj, std::string path)
 {
 	string str = ceConfig::ToString(obj);
@@ -104,6 +105,6 @@ int ceConfig::SaveJson(Json::Value obj)
 {
 	return ceConfig::WriteJson(obj, this->m_path);
 }
-
+#endif
 } // namespace ce 
 

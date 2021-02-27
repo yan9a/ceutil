@@ -13,18 +13,7 @@
 #ifndef CESERIAL_H
 #define CESERIAL_H
 #include <string>
-
-#if defined(_WIN64) || defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__WINDOWS__) || defined(__TOS_WIN__)
-	#ifndef CE_WINDOWS
-		#define CE_WINDOWS
-	#endif
-    // #define CE_WINDOWS 
-#elif defined(unix) || defined(__unix) || defined(__unix__)
-	#ifndef CE_LINUX
-		#define CE_LINUX
-	#endif
-    // #define CE_LINUX
-#endif
+#include "ceMacros.h" // macros
 
 #ifdef CE_WINDOWS
 	#include <windows.h>

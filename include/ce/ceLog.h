@@ -13,18 +13,11 @@
 #include <sstream>
 #include <vector>
 #include "ceDateTime.h"
-
-#if defined(_WIN64) || defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__WINDOWS__) || defined(__TOS_WIN__)
-    #ifndef CE_WINDOWS
-        #define CE_WINDOWS
-    #endif
+#include "ceMacros.h" // macros
+#if defined(CE_WINDOWS)
     #include <windows.h>
     #define stat _stat
-    // using namespace System;
 #else
-    #ifndef CE_LINUX
-        #define CE_LINUX
-    #endif
     #include <unistd.h>
     #include <sys/types.h>
     #include <dirent.h>

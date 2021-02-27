@@ -8,29 +8,15 @@
 #define CEDATETIME_H
 
 #include<string> 
+#include "ceMacros.h" // macros
 
-#if defined(_WIN64) || defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__WINDOWS__) || defined(__TOS_WIN__)
-    #ifndef CE_WINDOWS
-        #define CE_WINDOWS
-    #endif 
+#if defined(CE_WINDOWS)
 	#include<time.h>
-#elif defined(unix) || defined(__unix) || defined(__unix__)
-    #ifndef CE_LINUX
-    #define CE_LINUX
-    #endif
+#elif defined(CE_LINUX)
 	#include<time.h>
 #else 
     #define ceSYSTEMINDEPENDENT  //the system might not even have RTC, like microcontrollers
-
-#endif // defined
-
-#ifdef __x86_64
-#ifndef CE_x86_64
-#define CE_x86_64
-#endif
-#else	
-
-#endif
+#endif 
 
 namespace ce {
 

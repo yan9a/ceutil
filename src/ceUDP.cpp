@@ -6,7 +6,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "ce/ceUDP.h"
-
+#if CE_WX==1
 namespace ce {
 
 ceUDP::ceUDP(wxAppConsole* app, int socketid, int rx_port) :
@@ -180,4 +180,4 @@ void ceUDP::Rx(int socketid, std::vector<char> bv, std::string ip, int port)
 }
 
 } // namespace ce 
-
+#endif // CE_WX

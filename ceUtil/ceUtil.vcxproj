@@ -24,6 +24,7 @@
     <ClInclude Include="..\include\ce\ceFrame.h" />
     <ClInclude Include="..\include\ce\ceI2C.h" />
     <ClInclude Include="..\include\ce\ceLog.h" />
+    <ClInclude Include="..\include\ce\ceMacros.h" />
     <ClInclude Include="..\include\ce\ceMisc.h" />
     <ClInclude Include="..\include\ce\ceMmDateTime.h" />
     <ClInclude Include="..\include\ce\cePCA9535.h" />

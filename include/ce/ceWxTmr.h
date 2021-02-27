@@ -6,7 +6,8 @@
 
 #ifndef CEWXTMR_H
 #define CEWXTMR_H
-
+#include "ceMacros.h" // macros
+#if CE_WX==1
 #include "wx/wx.h"
 namespace ce {
 
@@ -23,5 +24,5 @@ private:
 };
 
 } // namespace ce 
-
+#endif // CE_WX
 #endif // CEWXTMR_H

@@ -7,23 +7,7 @@
 #ifndef CE_UTIL_H
 #define CE_UTIL_H
 
-#if defined(_WIN64) || defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__WINDOWS__) || defined(__TOS_WIN__)
-    #ifndef CE_WINDOWS
-        #define CE_WINDOWS
-    #endif
-#else
-    #ifndef CE_LINUX
-        #define CE_LINUX
-    #endif
-#endif
-
-#ifdef __x86_64
-    #ifndef CE_x86_64
-        #define CE_x86_64
-    #endif
-#else	
-
-#endif
+#include "ceMacros.h" // macros
 
 // The latest soure for ceDateTime is at
 //    https://github.com/yan9a/mmcal/tree/master/cpp
