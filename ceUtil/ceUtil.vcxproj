@@ -31,6 +31,7 @@
     <ClInclude Include="..\include\ce\ceSerial.h" />
     <ClInclude Include="..\include\ce\ceUDP.h" />
     <ClInclude Include="..\include\ce\ceUtil.h" />
+    <ClInclude Include="..\include\ce\cewxcvMisc.h" />
     <ClInclude Include="..\include\ce\ceWxTmr.h" />
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +45,7 @@
     <ClCompile Include="..\src\cePCA9535.cpp" />
     <ClCompile Include="..\src\ceSerial.cpp" />
     <ClCompile Include="..\src\ceUDP.cpp" />
+    <ClCompile Include="..\src\cewxcvMisc.cpp" />
     <ClCompile Include="..\src\ceWxTmr.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

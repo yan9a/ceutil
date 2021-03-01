@@ -122,7 +122,7 @@ void ceLog::Clean(string path,string extension,double expiry_seconds)
 
     try{
         ReadDir(path,filenames);
-        int nfiles=filenames.size();
+        int nfiles=(int)filenames.size();
         #if ceLog_PRINT == 1
         printf("Number of items: %d \n",nfiles);
         #endif
@@ -137,7 +137,7 @@ void ceLog::Clean(string path,string extension,double expiry_seconds)
             #if ceLog_PRINT == 1
             printf("File name: %s \n",fn.c_str());
             #endif
-            pos=fn.find(extension);
+            pos=(int)fn.find(extension);
             if(pos>=0){
                 fpath=path+fn;
                 this->m_ft.SetJD(LastModified(fpath));
@@ -176,10 +176,10 @@ void ceLog::Clean() //clean old log files
 
 		WCHAR wstr[256];
 		//http://msdn.microsoft.com/en-us/library/cc500362.aspx
-		MultiByteToWideChar(0, 0, pattern.c_str(), pattern.length(), wstr, 256);
+		MultiByteToWideChar(0, 0, pattern.c_str(), (int)pattern.length(), wstr, 256);
 		// LPCSTR lstr = wstr;
 		LPBOOL useddefault = FALSE;
-		char fn[256];
+		// char fn[256];
 
 		if ((hFind = FindFirstFileA(pattern.c_str(), &data)) != INVALID_HANDLE_VALUE) {
 			//if ((hFind = FindFirstFile(wstr, &data)) != INVALID_HANDLE_VALUE) {

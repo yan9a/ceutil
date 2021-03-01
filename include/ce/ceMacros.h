@@ -11,7 +11,7 @@
 #define CE_WX 1 // include WX
 #define CE_CV 1 // include CV
 
-#if defined(_WIN64) || defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__WINDOWS__) || defined(__TOS_WIN__)
+#if defined(_WIN64) || defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__WINDOWS__) || defined(__TOS_WIN__) || defined(__CYGWIN__)
 	#ifndef CE_WINDOWS
 		#define CE_WINDOWS
 	#endif
