@@ -44,12 +44,12 @@ std::string ceMisc::ToStr16(int i)
 
 std::string ceMisc::ToStr16(unsigned char c)
 {
-	return ceMisc::ToStr16(c);
+	return ceMisc::ToStr16((unsigned int)c);
 }
 
 std::string ceMisc::ToStr16(char c)
 {
-	return ceMisc::ToStr16((unsigned char)c);
+	return ceMisc::ToStr16((unsigned int)c);
 }
 
 // convert vector to hexadecimal string
