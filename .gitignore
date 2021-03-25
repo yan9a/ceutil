@@ -1,6 +1,5 @@
 build/
-*/.vs/
-*/x64/
-*/build/
+.vs/
+x64/
 *.log
 *.vcxproj.user
