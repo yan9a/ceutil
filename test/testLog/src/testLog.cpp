@@ -1,3 +1,4 @@
+#include <wx/wx.h>
 #include "ce/ceUtil.h"
 using namespace ce;
 int main(){
