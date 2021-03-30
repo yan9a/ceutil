@@ -27,6 +27,7 @@
     <ClInclude Include="..\include\ce\ceMacros.h" />
     <ClInclude Include="..\include\ce\ceMisc.h" />
     <ClInclude Include="..\include\ce\ceMmDateTime.h" />
+    <ClInclude Include="..\include\ce\ceModbus.h" />
     <ClInclude Include="..\include\ce\cePCA9535.h" />
     <ClInclude Include="..\include\ce\ceSerial.h" />
     <ClInclude Include="..\include\ce\ceUDP.h" />
@@ -42,6 +43,7 @@
     <ClCompile Include="..\src\ceLog.cpp" />
     <ClCompile Include="..\src\ceMisc.cpp" />
     <ClCompile Include="..\src\ceMmDateTime.cpp" />
+    <ClCompile Include="..\src\ceModbus.cpp" />
     <ClCompile Include="..\src\cePCA9535.cpp" />
     <ClCompile Include="..\src\ceSerial.cpp" />
     <ClCompile Include="..\src\ceUDP.cpp" />

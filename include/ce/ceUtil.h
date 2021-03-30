@@ -7,6 +7,7 @@
 #ifndef CE_UTIL_H
 #define CE_UTIL_H
 
+#include <wx/wx.h>
 #include "ceMacros.h" // macros
 
 // The latest soure for ceDateTime is at
@@ -33,6 +34,9 @@
 
 // Frame encode and decode
 #include "ce/ceFrame.h"
+
+// Modbus frame
+#include "ce/ceModbus.h"
 
 // I2C communication module
 #include "ce/ceI2C.h"

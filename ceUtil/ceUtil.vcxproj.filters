@@ -57,6 +57,9 @@
     <ClInclude Include="..\include\ce\cewxcvMisc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\ce\ceModbus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\ceConfig.cpp">
@@ -93,6 +96,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\cewxcvMisc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ceModbus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testModbus", "testModbus.vcxproj", "{850665AF-0AF1-4CF0-9447-2ACC1E2596E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{850665AF-0AF1-4CF0-9447-2ACC1E2596E3}.Debug|x64.ActiveCfg = Debug|x64
+		{850665AF-0AF1-4CF0-9447-2ACC1E2596E3}.Debug|x64.Build.0 = Debug|x64
+		{850665AF-0AF1-4CF0-9447-2ACC1E2596E3}.Debug|x86.ActiveCfg = Debug|Win32
+		{850665AF-0AF1-4CF0-9447-2ACC1E2596E3}.Debug|x86.Build.0 = Debug|Win32
+		{850665AF-0AF1-4CF0-9447-2ACC1E2596E3}.Release|x64.ActiveCfg = Release|x64
+		{850665AF-0AF1-4CF0-9447-2ACC1E2596E3}.Release|x64.Build.0 = Release|x64
+		{850665AF-0AF1-4CF0-9447-2ACC1E2596E3}.Release|x86.ActiveCfg = Release|Win32
+		{850665AF-0AF1-4CF0-9447-2ACC1E2596E3}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {16967C37-6C30-4296-BE8C-88110AB29EE9}
+	EndGlobalSection
+EndGlobal
