@@ -14,7 +14,7 @@ using namespace ce;
 int main()
 {
 #ifdef CE_WINDOWS
-	ceSerial com("\\\\.\\COM13", 9600, 8, 'N', 1); // Windows
+	ceSerial com("\\\\.\\COM9", 9600, 8, 'N', 1); // Windows
 #else
 	ceSerial com("/dev/ttyS0", 9600, 8, 'N', 1); // Linux
 #endif
@@ -28,8 +28,8 @@ int main()
 		return 1;
 	}
 	ceModbus m;
-	// m.SetControl(1,1,3);
-	m.SetReadStatus(1, 1, 4);
+	m.SetControl(1,1,3);
+	// m.SetReadStatus(1, 1, 4);
 	printf("Writing %z bytes.\n", m.GetTxN());
 
 	bool successFlag;
@@ -50,10 +50,10 @@ int main()
 				char* buf = m.GetRxBuf();
 				size_t rn = m.GetRxN();
 				if (buf[1] == 6) {
-					printf("Received control reply\n");
+					printf("\nReceived control reply\n");
 				}
 				else if (buf[1] == 3) {
-					printf("Received read reply\n");
+					printf("\nReceived read reply\n");
 					std::vector<uint16_t> rstatus = m.GetStatus(buf,rn);
 					for (uint16_t& s : rstatus) {
 						printf("Status: %d\n",s);

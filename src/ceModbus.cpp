@@ -201,4 +201,16 @@ std::vector<uint16_t> ceModbus::GetStatus(char* d, size_t n)
 	return v;
 }
 
+std::vector<char> ceModbus::GetTxVec()
+{
+	std::vector<char> v((char*)tb, (char*)tb + this->TxN);
+	return v;
+}
+
+std::vector<char> ceModbus::GetRxVec()
+{
+	std::vector<char> v((char*)rb, (char*)rb + this->RxN);
+	return v;
+}
+
 } // namespace ce 

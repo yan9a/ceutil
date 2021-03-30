@@ -43,6 +43,8 @@ public:
 	void SetControl(uint8_t slaveid, uint16_t addr, uint8_t command, uint8_t delay=0);
 	void SetReadStatus(uint8_t slaveid, uint16_t startAddr, uint16_t len);
 	std::vector<uint16_t> GetStatus(char* d, size_t n);
+	std::vector<char> GetTxVec();
+	std::vector<char> GetRxVec();
 };
 //-----------------------------------------------------------------------------
 } // namespace ce 
