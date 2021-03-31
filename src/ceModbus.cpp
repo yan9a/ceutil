@@ -126,11 +126,13 @@ int ceModbus::Tick()
 {
 	if (this->_tick_n<= CE_NUMBER_OF_TICKS_TO_RESET) {
 		this->_tick_n++;
+		return 0;
 	}
 	else {
 		this->_count = 0;
 		this->_frameSize = 8;// default
 		this->RxN = 0;
+		return 1;
 	}
 }
 
