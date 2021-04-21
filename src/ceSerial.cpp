@@ -71,7 +71,7 @@ ceSerial::~ceSerial()
 	Close();
 }
 
-void ceSerial::SetPort(string Device) {
+void ceSerial::SetPortName(string Device) {
 	port = Device;
 }
 

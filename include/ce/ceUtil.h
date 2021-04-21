@@ -8,7 +8,7 @@
 #define CE_UTIL_H
 
 #include <wx/wx.h>
-#include "ceMacros.h" // macros
+#include "ce/ceMacros.h" // macros
 
 // The latest soure for ceDateTime is at
 //    https://github.com/yan9a/mmcal/tree/master/cpp
@@ -38,6 +38,9 @@
 // Modbus frame
 #include "ce/ceModbus.h"
 
+// Frame encode and decode for command with /r/n
+#include "ce/ceFraCmd.h"
+
 // I2C communication module
 #include "ce/ceI2C.h"
 
@@ -46,5 +49,8 @@
 
 // Config
 #include "ce/ceConfig.h"
+
+// ceWxSerial
+#include "ce/ceWxSerial.h"
 
 #endif // CE_UTIL_H

@@ -8,18 +8,21 @@
 #include "ce/ceFrame.h"
 namespace ce {
 //-----------------------------------------------------------------------------
-ceFrame::ceFrame() :TxN(0), RxN(0), rState(CE_FRAME_IGNORE) {}
+ceFrame::ceFrame() :TxN(0), RxN(0), rState(CE_FRAME_IGNORE) {
+	rb[0] = 0;
+	tb[0] = 0;
+}
 //-----------------------------------------------------------------------------
-char* ceFrame::getTxBuf() {
+char* ceFrame::GetTxBuf() {
 	return tb;
 }
 //-----------------------------------------------------------------------------
-char* ceFrame::getRxBuf() {
+char* ceFrame::GetRxBuf() {
 	return rb;
 }
 //-----------------------------------------------------------------------------
 //Prepare transmitting frame
-int ceFrame::setTxFrame(char* d, int n)
+size_t ceFrame::SetTxFrame(char* d, size_t n)
 {
 	unsigned int txcrc = 0xFFFF;//initialize crc
 	char c;
@@ -32,7 +35,7 @@ int ceFrame::setTxFrame(char* d, int n)
 	}
 	tb[i++] = (ETX);//end of frame
 
-	txcrc = CRC16CCITT_Calculate(d, n, txcrc);//calculate crc
+	txcrc = CRC16(d, n, txcrc);//calculate crc
 	tb[i++] = txcrc & 0xFF;
 	tb[i++] = (txcrc >> 8) & 0xFF;
 	TxN = i;
@@ -46,7 +49,7 @@ int ceFrame::setTxFrame(char* d, int n)
 
 //Output
 //Returns calculated CRC
-unsigned int ceFrame::CRC16CCITT_Calculate(char* s, unsigned char len, unsigned int crc)
+uint16_t ceFrame::CRC16(char* s, size_t len, uint16_t crc)
 {
 	//CRC Order: 16
 	//CCITT(recommendation) : F(x)= x16 + x12 + x5 + 1
@@ -65,20 +68,20 @@ unsigned int ceFrame::CRC16CCITT_Calculate(char* s, unsigned char len, unsigned 
 }
 //-----------------------------------------------------------------------------
 //get number of transmitting bytes
-int ceFrame::getTxN()
+size_t ceFrame::GetTxN()
 {
 	return TxN;
 }
 //-----------------------------------------------------------------------------
 //get number of receiving bytes
-int ceFrame::getRxN()
+size_t ceFrame::GetRxN()
 {
 	return RxN;
 }
 //-----------------------------------------------------------------------------
 // process receiving char
 // return RXN if a frame is successfully received, else retrun 0
-int ceFrame::receiveRxFrame(char c)
+size_t ceFrame::ReceiveRxFrame(char c)
 {
 	static char b;
 	unsigned int crc;
@@ -99,7 +102,7 @@ int ceFrame::receiveRxFrame(char c)
 	case CE_FRAME_RXCRC2:
 		rState = CE_FRAME_IGNORE;
 		crc = ((int)c << 8 | ((int)b & 0xFF)) & 0xFFFF;//get received crc
-		rxcrc = CRC16CCITT_Calculate(rb, RxN, rxcrc);//calculate crc
+		rxcrc = CRC16(rb, RxN, rxcrc);//calculate crc
 		//printf("crc: %x  rxcrc:%x \n",crc,rxcrc);
 		if (rxcrc == crc) { return RxN; }//if crc is correct            
 		else { RxN = 0; }//discard the frame

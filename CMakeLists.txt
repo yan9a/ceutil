@@ -22,6 +22,7 @@ ${CMAKE_SOURCE_DIR}/src/cePCA9535.cpp
 ${CMAKE_SOURCE_DIR}/src/ceConfig.cpp
 ${CMAKE_SOURCE_DIR}/src/cewxcvMisc.cpp
 ${CMAKE_SOURCE_DIR}/src/ceModbus.cpp
+${CMAKE_SOURCE_DIR}/src/ceWxSerial.cpp
 )
 target_link_libraries(${PROJECT_NAME} jsoncpp ${wxWidgets_LIBRARIES} ${OpenCV_LIBS})
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)

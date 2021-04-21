@@ -13,7 +13,7 @@
 #include <vector>
 #include <sstream>
 #include <iomanip>
-#include "ceMacros.h" // macros
+#include "ce/ceMacros.h" // macros
 
 namespace ce {
 class ceMisc {

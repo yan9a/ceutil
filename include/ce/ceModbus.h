@@ -8,35 +8,26 @@
 
 #ifndef CE_MODBUS_H
 #define CE_MODBUS_H
-
+#include "ce/ceFrame.h"
 #define CR 0x0D
 #define LF 0x0A
-#define CE_MODBUS_TX_BUF_SIZE 64
-#define CE_MODBUS_RX_BUF_SIZE 64
-#define CE_NUMBER_OF_TICKS_TO_RESET 8
+#define CE_NUMBER_OF_TICKS_TO_RESET 10
 #include <cstdint>
 #include <vector>
 namespace ce {
 //-----------------------------------------------------------------------------
-class ceModbus {
+class ceModbus : public ceFrame {
 private:
 protected:
-	size_t TxN;//number of transmitting bytes
-	size_t RxN;//number of receiving bytes
-	char tb[CE_MODBUS_TX_BUF_SIZE];//transmit buffer
-	char rb[CE_MODBUS_RX_BUF_SIZE];//receiving data
 	size_t _count; // receiving count
 	size_t _frameSize;// frame size
 	int _tick_n;
+	int _reset_tick;
 public:
 	ceModbus();
-	size_t SetTxFrame(const char* d, size_t n);
-	uint16_t CalCRC16(char* s, size_t len, uint16_t crc);
-	size_t GetTxN();
-	size_t GetRxN();
-	size_t GetRxFrame(char c);//get receiving frame from received char
-	char* GetTxBuf();
-	char* GetRxBuf();
+	size_t SetTxFrame(char* d, size_t n) override;
+	uint16_t CRC16(char* s, size_t len, uint16_t crc) override;
+	size_t ReceiveRxFrame(char c) override;//get receiving frame from received char
 	int Tick();// to reset frame receiving after CE_NUMBER_OF_TICKS_TO_RESET of no char rx 
 	void SetCmd(std::vector<uint8_t> v);
 	void SetCmd(uint8_t slaveid, uint8_t func, uint16_t addr, std::vector<uint8_t> data);
@@ -45,6 +36,8 @@ public:
 	std::vector<uint16_t> GetStatus(char* d, size_t n);
 	std::vector<char> GetTxVec();
 	std::vector<char> GetRxVec();
+	void SetResetTickCount(int n);
+	int GetResetTickCount();
 };
 //-----------------------------------------------------------------------------
 } // namespace ce 

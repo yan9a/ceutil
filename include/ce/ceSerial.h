@@ -13,7 +13,7 @@
 #ifndef CESERIAL_H
 #define CESERIAL_H
 #include <string>
-#include "ceMacros.h" // macros
+#include "ce/ceMacros.h" // macros
 
 #ifdef CE_WINDOWS
 	#include <windows.h>
@@ -55,7 +55,7 @@ public:
 	bool GetRI(bool& success);
 	bool GetCD(bool& success);
 	bool IsOpened();
-	void SetPort(std::string Port);
+	void SetPortName(std::string Port); 
 	std::string GetPort();
 	void SetBaudRate(long baudrate);
 	long GetBaudRate();

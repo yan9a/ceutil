@@ -9,23 +9,13 @@
 #include "ce/ceModbus.h"
 namespace ce {
 //-----------------------------------------------------------------------------
-ceModbus::ceModbus() :TxN(0), RxN(0), _count(0), _frameSize(8), _tick_n(0) {
-	this->tb[0] = 0;
-	this->rb[0] = 0;
-}
-//-----------------------------------------------------------------------------
-char* ceModbus::GetTxBuf() {
-	return this->tb;
-}
-//-----------------------------------------------------------------------------
-char* ceModbus::GetRxBuf() {
-	return this->rb;
+ceModbus::ceModbus():ceFrame(),_count(0), _frameSize(8), _tick_n(0), _reset_tick(CE_NUMBER_OF_TICKS_TO_RESET) {
 }
 //-----------------------------------------------------------------------------
 //Prepare transmitting frame
-size_t ceModbus::SetTxFrame(const char* d, size_t n)
+size_t ceModbus::SetTxFrame(char* d, size_t n)
 {
-	if (n > (CE_MODBUS_TX_BUF_SIZE - 2)) return 0;// size error
+	if (n > (CE_FRAME_TX_BUF_SIZE - 2)) return 0;// size error
 	uint16_t txcrc = 0xFFFF;//initialize crc
 	char c;
 	size_t i = 0, j = 0;
@@ -34,7 +24,7 @@ size_t ceModbus::SetTxFrame(const char* d, size_t n)
 		// no need to check c in building Modbus frame
 		this->tb[i++] = c;
 	}
-	txcrc = this->CalCRC16((char*)d, n, txcrc);//calculate crc
+	txcrc = this->CRC16((char*)d, n, txcrc);//calculate crc
 	this->tb[i++] = txcrc & 0xFF;
 	this->tb[i++] = (txcrc >> 8) & 0xFF;
 	this->TxN = i;
@@ -50,7 +40,7 @@ size_t ceModbus::SetTxFrame(const char* d, size_t n)
 //Returns calculated CRC
 
 // Ref: http://cool-emerald.blogspot.com/2009/09/crc-calculation-in-vb-and-c.html
-uint16_t ceModbus::CalCRC16(char* s, size_t len, uint16_t crc)
+uint16_t ceModbus::CRC16(char* s, size_t len, uint16_t crc)
 {
 	//CRC Order: 16
 	//CRC Poly: 0x8005 <=> A001
@@ -68,22 +58,10 @@ uint16_t ceModbus::CalCRC16(char* s, size_t len, uint16_t crc)
 	return (crc & 0xFFFF);//truncate last 16 bit
 }
 //-----------------------------------------------------------------------------
-//get number of transmitting bytes
-size_t ceModbus::GetTxN()
-{
-	return TxN;
-}
-//-----------------------------------------------------------------------------
-//get number of receiving bytes
-size_t ceModbus::GetRxN()
-{
-	return RxN;
-}
-//-----------------------------------------------------------------------------
 // process receiving char
 // return RXN if a frame is successfully received, else retrun 0
 // CRC16 is also included
-size_t ceModbus::GetRxFrame(char c)
+size_t ceModbus::ReceiveRxFrame(char c)
 {
 	// accept any value even 0x0D to get 8 bytes 
 	//  (not using start and end 28 bit length mark condition)
@@ -112,9 +90,9 @@ size_t ceModbus::GetRxFrame(char c)
 		// for (int i = 0; i < this->RxN; i++) printf("%02X ", (unsigned int)this->rb[i] & 0xFF);
 		// uint16_t rxcrc = ((uint16_t)this->rb[this->RxN-1] << 8 | ((uint16_t)this->rb[this->RxN - 2] & 0xFF)) & 0xFFFF;//get received crc
 		uint16_t computed_crc = 0xFFFF;//initialize CRC
-		computed_crc = CalCRC16(rb, RxN, computed_crc);//calculate crc
+		computed_crc = this->CRC16(rb, RxN, computed_crc);//calculate crc
 		// printf("\nComputed crc: %02X \n",computed_crc);
-		if (computed_crc==0) { return this->RxN; }//if crc is correct            
+		if (computed_crc == 0) { this->RxN -= 2; return (this->RxN); }//if crc is correct return bytes excluding crc           
 		else { this->RxN = 0; }//discard the frame
 	}
 	return 0;
@@ -124,23 +102,22 @@ size_t ceModbus::GetRxFrame(char c)
 // return =  0 : if no reset, 1 : if reset
 int ceModbus::Tick()
 {
-	if (this->_tick_n<= CE_NUMBER_OF_TICKS_TO_RESET) {
+	if (this->_tick_n <= this->_reset_tick) {
 		this->_tick_n++;
-		return 0;
 	}
 	else {
 		this->_count = 0;
 		this->_frameSize = 8;// default
 		this->RxN = 0;
-		return 1;
 	}
+	return this->_tick_n;
 }
 
 // command vector without CRC16
 // CRC16 will be calculated and appended
 void ceModbus::SetCmd(std::vector<uint8_t> v)
 {
-	this->SetTxFrame((const char*)v.data(), v.size());
+	this->SetTxFrame((char*)v.data(), v.size());
 }
 
 void ceModbus::SetCmd(uint8_t slaveid, uint8_t func, uint16_t addr, std::vector<uint8_t> data)
@@ -176,18 +153,18 @@ std::vector<uint16_t> ceModbus::GetStatus(char* d, size_t n)
 {
 	std::vector<uint16_t> v;
 	if (n < 3) {
-		perror("Modbus frame error in getting status");
+		// perror("Modbus frame error in getting status");
 		return v;
 	}
 
 	if (d[1] != 0x03) {
-		perror("Frame must be Modbus read status return to get status");
+		// perror("Frame must be Modbus read status return to get status");
 		return v;
 	}
 
 	uint8_t len = (uint8_t)d[2]; // get len
 	if (n < ((size_t)len+3)) {
-		perror("Modbus frame length error in getting status");
+		// perror("Modbus frame length error in getting status");
 		return v;
 	}
 
@@ -213,6 +190,16 @@ std::vector<char> ceModbus::GetRxVec()
 {
 	std::vector<char> v((char*)rb, (char*)rb + this->RxN);
 	return v;
+}
+
+void ceModbus::SetResetTickCount(int n)
+{
+	this->_reset_tick = n;
+}
+
+int ceModbus::GetResetTickCount()
+{
+	return this->_reset_tick;
 }
 
 } // namespace ce 

@@ -12,8 +12,8 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include "ceDateTime.h"
-#include "ceMacros.h" // macros
+#include "ce/ceDateTime.h"
+#include "ce/ceMacros.h" // macros
 #if defined(CE_WINDOWS)
     #include <windows.h>
     #define stat _stat

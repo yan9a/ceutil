@@ -8,7 +8,7 @@
 #define CEDATETIME_H
 
 #include<string> 
-#include "ceMacros.h" // macros
+#include "ce/ceMacros.h" // macros
 
 #if defined(CE_WINDOWS)
 	#include<time.h>

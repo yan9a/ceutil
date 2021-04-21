@@ -7,7 +7,7 @@
 #ifndef CECONFIG_H
 #define CECONFIG_H
 
-#include "ceMacros.h" // macros
+#include "ce/ceMacros.h" // macros
 
 #include <stdio.h>
 #include <cstdint>

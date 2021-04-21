@@ -9,7 +9,7 @@
 #ifndef CEI2C_H
 #define CEI2C_H
 
-#include "ceMacros.h" // macros
+#include "ce/ceMacros.h" // macros
 
 #ifdef CE_LINUX
     #include <unistd.h>

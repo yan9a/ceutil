@@ -172,9 +172,10 @@ void ceUDP::OnSocketEvent(wxSocketEvent& event)
 void ceUDP::Rx(int socketid, std::vector<char> bv, std::string ip, int port)
 {
 	// ("UDP rx" + to_string(socketid) + ": " + util::cvec2hex(bv));
+	wxString ws(ip);
 	wxThreadEvent event(wxEVT_THREAD, socketid);
 	event.SetPayload<std::vector<char>>(bv);
-	event.SetString(ip);
+	event.SetString(ws);
 	event.SetInt(port);
 	wxQueueEvent(_app, event.Clone());
 }

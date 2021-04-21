@@ -14,7 +14,7 @@ using namespace ce;
 int main()
 {
 #ifdef CE_WINDOWS
-	ceSerial com("\\\\.\\COM9", 9600, 8, 'N', 1); // Windows
+	ceSerial com("\\\\.\\COM17", 9600, 8, 'N', 1); // Windows
 #else
 	ceSerial com("/dev/ttyS0", 9600, 8, 'N', 1); // Linux
 #endif
@@ -46,7 +46,7 @@ int main()
 		char c = com.ReadChar(successFlag); // read a char
 		if (successFlag) {
 			printf("%02X ", (unsigned int)c & 0xFF);
-			if (m.GetRxFrame(c)) {
+			if (m.ReceiveRxFrame(c)) {
 				char* buf = m.GetRxBuf();
 				size_t rn = m.GetRxN();
 				if (buf[1] == 6) {

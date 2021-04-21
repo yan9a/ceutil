@@ -8,7 +8,7 @@
 #define CEWXCVMISC_H
 
 #include <string>
-#include "ceMacros.h" // macros
+#include "ce/ceMacros.h" // macros
 #if CE_WX==1
 #include "wx/wx.h"
 #endif // CE_WX

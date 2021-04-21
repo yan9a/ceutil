@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="..\include\ce\ceConfig.h" />
     <ClInclude Include="..\include\ce\ceDateTime.h" />
+    <ClInclude Include="..\include\ce\ceFraCmd.h" />
     <ClInclude Include="..\include\ce\ceFrame.h" />
     <ClInclude Include="..\include\ce\ceI2C.h" />
     <ClInclude Include="..\include\ce\ceLog.h" />
@@ -33,11 +34,13 @@
     <ClInclude Include="..\include\ce\ceUDP.h" />
     <ClInclude Include="..\include\ce\ceUtil.h" />
     <ClInclude Include="..\include\ce\cewxcvMisc.h" />
+    <ClInclude Include="..\include\ce\ceWxSerial.h" />
     <ClInclude Include="..\include\ce\ceWxTmr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\ceConfig.cpp" />
     <ClCompile Include="..\src\ceDateTime.cpp" />
+    <ClCompile Include="..\src\ceFraCmd.cpp" />
     <ClCompile Include="..\src\ceFrame.cpp" />
     <ClCompile Include="..\src\ceI2C.cpp" />
     <ClCompile Include="..\src\ceLog.cpp" />
@@ -48,6 +51,7 @@
     <ClCompile Include="..\src\ceSerial.cpp" />
     <ClCompile Include="..\src\ceUDP.cpp" />
     <ClCompile Include="..\src\cewxcvMisc.cpp" />
+    <ClCompile Include="..\src\ceWxSerial.cpp" />
     <ClCompile Include="..\src\ceWxTmr.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
