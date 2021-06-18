@@ -1,6 +1,6 @@
 // File: ModbusCmd.cpp
 // Description: Modbus RTS communication for RS485 switches
-// WebSite: http://cool-emerald.blogspot.sg/2017/05/serial-port-programming-in-c-with.htmlactList
+// WebSite: http://cool-emerald.blogspot.sg/2017/05/serial-port-programming-in-c-with.html
 // MIT License (https://opensource.org/licenses/MIT)
 // Copyright (c) 2021 Yan Naing Aye
 
@@ -397,7 +397,7 @@ void MyFrame::ModbusCmd(vector<uint8_t> cmd)
 
 void MyFrame::OnTimer(wxTimerEvent& WXUNUSED(event))
 {
-
+	this->_app->_modbus->Tick();
 }
 
 void MyFrame::OnClear(wxCommandEvent& WXUNUSED(event))

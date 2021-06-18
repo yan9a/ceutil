@@ -49,8 +49,7 @@ uint16_t ceModbus::CRC16(char* s, size_t len, uint16_t crc)
 	size_t i, j;
 	for (i = 0; i < len; i++, s++) {
 		crc ^= ((unsigned int)(*s)) & 0xFF;
-		for (j = 0; j < 8; j++)
-		{
+		for (j = 0; j < 8; j++)	{
 			if (crc & 0x0001) crc = (crc >> 1) ^ 0xA001;
 			else crc >>= 1;
 		}
@@ -92,7 +91,10 @@ size_t ceModbus::ReceiveRxFrame(char c)
 		uint16_t computed_crc = 0xFFFF;//initialize CRC
 		computed_crc = this->CRC16(rb, RxN, computed_crc);//calculate crc
 		// printf("\nComputed crc: %02X \n",computed_crc);
-		if (computed_crc == 0) { this->RxN -= 2; return (this->RxN); }//if crc is correct return bytes excluding crc           
+		if (computed_crc == 0) { 
+			//this->RxN -= 2; 
+			return (this->RxN); //if crc is correct return bytes including crc 
+		}          
 		else { this->RxN = 0; }//discard the frame
 	}
 	return 0;
