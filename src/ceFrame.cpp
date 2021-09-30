@@ -56,7 +56,7 @@ uint16_t ceFrame::CRC16(char* s, size_t len, uint16_t crc)
 	//CRC Poly: 0x1021
 	//Operational initial value:  0xFFFF
 	//Final xor value: 0
-	unsigned char i, j;
+	size_t i, j;
 	for (i = 0; i < len; i++, s++) {
 		crc ^= ((unsigned int)(*s) & 0xFF) << 8;
 		for (j = 0; j < 8; j++) {
