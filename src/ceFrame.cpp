@@ -111,6 +111,12 @@ size_t ceFrame::ReceiveRxFrame(char c)
 		if (c == STX) { rState = CE_FRAME_RECEIVING; RxN = 0; }
 		break;
 	}
+
+	if (RxN >= CE_FRAME_RX_BUF_SIZE) {
+		RxN = 0;
+		rState = CE_FRAME_IGNORE;
+	}
+
 	return 0;
 }
 

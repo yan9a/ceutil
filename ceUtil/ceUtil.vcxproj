@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="..\include\ce\ceConfig.h" />
     <ClInclude Include="..\include\ce\ceDateTime.h" />
+    <ClInclude Include="..\include\ce\ceFraChecksum.h" />
     <ClInclude Include="..\include\ce\ceFraCmd.h" />
     <ClInclude Include="..\include\ce\ceFrame.h" />
     <ClInclude Include="..\include\ce\ceI2C.h" />
@@ -40,6 +41,7 @@
   <ItemGroup>
     <ClCompile Include="..\src\ceConfig.cpp" />
     <ClCompile Include="..\src\ceDateTime.cpp" />
+    <ClCompile Include="..\src\ceFraChecksum.cpp" />
     <ClCompile Include="..\src\ceFraCmd.cpp" />
     <ClCompile Include="..\src\ceFrame.cpp" />
     <ClCompile Include="..\src\ceI2C.cpp" />

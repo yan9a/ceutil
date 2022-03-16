@@ -17,6 +17,8 @@ ${CMAKE_SOURCE_DIR}/src/ceWxTmr.cpp
 ${CMAKE_SOURCE_DIR}/src/ceUDP.cpp
 ${CMAKE_SOURCE_DIR}/src/ceMisc.cpp
 ${CMAKE_SOURCE_DIR}/src/ceFrame.cpp
+${CMAKE_SOURCE_DIR}/src/ceFraChecksum.cpp
+${CMAKE_SOURCE_DIR}/src/ceFraCmd.cpp
 ${CMAKE_SOURCE_DIR}/src/ceI2C.cpp
 ${CMAKE_SOURCE_DIR}/src/cePCA9535.cpp
 ${CMAKE_SOURCE_DIR}/src/ceConfig.cpp
