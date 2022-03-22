@@ -69,8 +69,8 @@ size_t ceFraChecksum::GetRxN()
 // return RXN if a frame is successfully received, else retrun 0
 size_t ceFraChecksum::ReceiveRxFrame(char c)
 {
-	unsigned int cs;
-	unsigned int rxcs;
+	uint8_t cs;
+	uint8_t rxcs;
 	switch (rState) {
 	case CE_FRAME_RECEIVING:
 		if (c == STX) { rState = CE_FRAME_RECEIVING; RxN = 0; }

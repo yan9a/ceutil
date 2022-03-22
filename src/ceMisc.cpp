@@ -49,7 +49,7 @@ std::string ceMisc::ToStr16(unsigned char c)
 
 std::string ceMisc::ToStr16(char c)
 {
-	return ceMisc::ToStr16((unsigned int)c);
+	return ceMisc::ToStr16((unsigned char)c);
 }
 
 // convert vector to hexadecimal string

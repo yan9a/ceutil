@@ -34,6 +34,8 @@
 
 // Frame encode and decode
 #include "ce/ceFrame.h"
+#include "ce/ceFraCmd.h"
+#include "ce/ceFraChecksum.h"
 
 // Modbus frame
 #include "ce/ceModbus.h"
