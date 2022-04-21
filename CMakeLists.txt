@@ -8,6 +8,7 @@ find_package(OpenCV REQUIRED)
 include("${wxWidgets_USE_FILE}")
 include_directories(${OpenCV_INCLUDE_DIR})
 include_directories( ${CMAKE_SOURCE_DIR}/include )
+include_directories( /usr/include/jsoncpp )
 add_library(${PROJECT_NAME} 
 ${CMAKE_SOURCE_DIR}/src/ceDateTime.cpp
 ${CMAKE_SOURCE_DIR}/src/ceMmDateTime.cpp

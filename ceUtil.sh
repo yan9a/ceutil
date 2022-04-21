@@ -13,6 +13,7 @@ if [ $# == 1 ]; then
  opt_sh=$1
 else 
  echo "You can input argument:"
+ echo " 'i': install"
  echo " 'c': cmake"
  echo " 'b': build"
  echo " ..."
@@ -27,6 +28,40 @@ echo "Option: $opt_sh"
 echo " ."
 echo " ."
 echo " ."
+
+
+if [[ "$opt_sh" == "i" ]]; then
+    # add the user to groups
+    # echo "Adding $USER to groups"
+    # sudo usermod -a -G netdev $USER
+    # sudo usermod -a -G dialout $USER
+
+    # install required lib
+    echo "Installing required lib ..."
+    # sudo apt update
+    sudo apt -y install build-essential cmake 
+
+    # for wxWidgets prerequisite
+    sudo apt -y install libgtk-3-dev checkinstall
+    sudo apt -y install libwxgtk3.0-gtk3-dev
+    wx-config --version
+
+    # opencv prerequisite
+    sudo apt -y install git pkg-config libavcodec-dev libavformat-dev libswscale-dev
+    sudo apt -y install libopencv-dev
+    # pkg-config --modversion opencv
+    # sudo sh -c "echo /usr/local/lib/ > /etc/ld.so.conf.d/opencv.conf"
+    # sudo ldconfig
+
+    #jsoncpp
+    sudo apt -y install libjsoncpp-dev     
+    # sudo sh -c "echo /usr/local/lib/ > /etc/ld.so.conf.d/jsoncpp.conf"
+    # sudo ldconfig
+
+    echo " ."
+    echo " ."
+    echo " ."
+fi # lib
 
 if [[ "$opt_sh" == "i" ]] || [[ "$opt_sh" == "c" ]]; then
     echo "Preparing cmake file"
