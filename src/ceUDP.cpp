@@ -127,6 +127,8 @@ int ceUDP::Tx(std::vector<char> bv, std::string remoteHost, int txPort)
 	else {        
         // std::string tmp ="UDP TX: "+util::cvec2hex(bv); 
 		// printf("%s\n",tmp.c_str());
+		//  printf("ceUDPTx n= %ld \n",txn);
+		//  fflush(stdout);
 	}
 	return 0;
 }
@@ -140,7 +142,7 @@ void ceUDP::OnSocketEvent(wxSocketEvent& event)
 {
 	IPaddress addr;
 	addr.Service(udp_port_rx);
-	char buf[1024];
+	char buf[32768];
 	size_t n;
 	int socketid = event.GetId();
 	std::string tmp; // = ("UDP RX: id = " + to_string(socketid));
@@ -160,7 +162,8 @@ void ceUDP::OnSocketEvent(wxSocketEvent& event)
 //			util::cvec2hex(util::cptr2cvec(buf, n)).c_str(),
 //			addr.IPAddress().ToStdString().c_str(), 
 //			addr.Service());
-//		fflush(stdout);
+		// printf("ceUDPRx n= %ld \n",n);
+		// fflush(stdout);
 		this->Rx(socketid,vc,addr.IPAddress().ToStdString(),addr.Service());
 		break;
 	default:

@@ -1,27 +1,26 @@
 #!/bin/bash
 
-PRJNAME="ceUtil"
-INSTALLPATH="/usr/local"
-echo "Current directory $PWD"
-SCRIPTDIR=$PWD
-cd ..
-BASEDIR=$PWD
-echo "Base dir $BASEDIR"
-opt_sh="r"
+SCRIPTNAME=`basename "$0"`
+PRJNAME="${SCRIPTNAME%.*}"
+SCRIPTDIR="${0%/$PRJNAME.*}"
+echo "Project: $PRJNAME"
+echo "Script directory: $SCRIPTDIR"
+
+opt_sh="build"
 
 if [ $# == 1 ]; then
  opt_sh=$1
 else 
  echo "You can input argument:"
- echo " 'i': install"
- echo " 'c': cmake"
- echo " 'b': build"
+ echo " 'install' : to install prerequisite packages, generate cmake files, build and install the lib"
+ echo " 'cmake' : to generate cmake files, build, and install"
+ echo " 'build': to build and install"
  echo " ..."
  read -p "Input an option: " opt_sh
 fi
 
 if [[ "$opt_sh" == "" ]]; then
-    opt_sh="b"
+    opt_sh="build"
 fi
 
 echo "Option: $opt_sh"
@@ -30,7 +29,7 @@ echo " ."
 echo " ."
 
 
-if [[ "$opt_sh" == "i" ]]; then
+if [[ "$opt_sh" == "install" ]]; then
     # add the user to groups
     # echo "Adding $USER to groups"
     # sudo usermod -a -G netdev $USER
@@ -63,7 +62,7 @@ if [[ "$opt_sh" == "i" ]]; then
     echo " ."
 fi # lib
 
-if [[ "$opt_sh" == "i" ]] || [[ "$opt_sh" == "c" ]]; then
+if [[ "$opt_sh" == "install" ]] || [[ "$opt_sh" == "cmake" ]]; then
     echo "Preparing cmake file"
     cd $SCRIPTDIR
     if [[ ! -d "./build" ]]; then
@@ -73,7 +72,7 @@ if [[ "$opt_sh" == "i" ]] || [[ "$opt_sh" == "c" ]]; then
     cd build
     cmake -D CMAKE_BUILD_TYPE=Release \
     -D BUILD_SHARED_LIBS=ON \
-    -D CMAKE_INSTALL_PREFIX=$INSTALLPATH \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
     ..
     cd ..
     echo " ."
@@ -81,24 +80,30 @@ if [[ "$opt_sh" == "i" ]] || [[ "$opt_sh" == "c" ]]; then
     echo " ."
 fi
 
-if [[ $opt_sh == "i" ]] || [[ $opt_sh == "c" ]] || [[ $opt_sh == "b" ]]; then
+if [[ $opt_sh == "install" ]] || [[ $opt_sh == "cmake" ]] || [[ $opt_sh == "build" ]]; then
     echo "Building ..."
     cd $SCRIPTDIR/build && make && sudo make install
     if [[ $? == 0 ]]; then
         echo "Build successful"
-        ls -l *$PRJNAME.so
-        ldd *$PRJNAME.so
-        ls -l *$PRJNAME.a
-        ar -t *$PRJNAME.a
+        ls -l *ceUtil.so
+        ldd *ceUtil.so
+        # ls -l *$ceUtil.a
+        # ar -t *$ceUtil.a
     else
         echo "Error in compiling"
     fi  
 else 
-    echo "Listing ..."
-    ls -l *$PRJNAME.so
-    ldd *$PRJNAME.so
-    ls -l *$PRJNAME.a
-    ar -t *$PRJNAME.a
+    echo "Invalid option for $PRJNAME ..."
 fi
 
+if [[ "$opt_sh" == "install" ]]; then
+    echo "Configuring lib path ..."
+    sudo sh -c "echo /usr/local/lib/ > /etc/ld.so.conf.d/ceutil.conf"
+    sudo ldconfig
+    echo " ."
+    echo " ."
+    echo " ."
+fi # config
+
+    
 
