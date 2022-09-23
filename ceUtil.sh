@@ -31,40 +31,46 @@ echo " ."
 
 if [[ "$opt_sh" == "install" ]]; then
     # add the user to groups
-    # echo "Adding $USER to groups"
-    # sudo usermod -a -G netdev $USER
-    # sudo usermod -a -G dialout $USER
+    opt_au="y"
+    read -p "Do you want to add current user to netdev and dialout groups [y/N]?: " opt_au 
+    if [ $opt_au == "y" ] || [ $opt_au == "Y" ]; then
+        echo "Adding $USER to groups"
+        sudo usermod -a -G netdev $USER
+        sudo usermod -a -G dialout $USER
+    fi
+    opt_reqlib="y"
+    read -p "Do you want to install required libraries [y/N]?: " opt_reqlib 
+    if [ $opt_reqlib == "y" ] || [ $opt_reqlib == "Y" ]; then
+        # install required lib
+        echo "Installing required lib ..."
+        # sudo apt update
+        sudo apt -y install build-essential cmake 
 
-    # install required lib
-    echo "Installing required lib ..."
-    # sudo apt update
-    sudo apt -y install build-essential cmake 
+        # for wxWidgets prerequisite
+        sudo apt -y install libgtk-3-dev checkinstall
+        sudo apt -y install libwxgtk3.0-gtk3-dev
+        wx-config --version
 
-    # for wxWidgets prerequisite
-    sudo apt -y install libgtk-3-dev checkinstall
-    sudo apt -y install libwxgtk3.0-gtk3-dev
-    wx-config --version
+        # opencv prerequisite
+        sudo apt -y install git pkg-config libavcodec-dev libavformat-dev libswscale-dev
+        sudo apt -y install libopencv-dev
+        pkg-config --modversion opencv
+        sudo sh -c "echo /usr/local/lib/ > /etc/ld.so.conf.d/opencv.conf"
 
-    # opencv prerequisite
-    sudo apt -y install git pkg-config libavcodec-dev libavformat-dev libswscale-dev
-    sudo apt -y install libopencv-dev
-    # pkg-config --modversion opencv
-    # sudo sh -c "echo /usr/local/lib/ > /etc/ld.so.conf.d/opencv.conf"
-    # sudo ldconfig
+        #jsoncpp
+        sudo apt -y install libjsoncpp-dev     
+        sudo sh -c "echo /usr/local/lib/ > /etc/ld.so.conf.d/jsoncpp.conf"
 
-    #jsoncpp
-    sudo apt -y install libjsoncpp-dev     
-    # sudo sh -c "echo /usr/local/lib/ > /etc/ld.so.conf.d/jsoncpp.conf"
-    # sudo ldconfig
-
+        sudo ldconfig
+    fi
     echo " ."
     echo " ."
     echo " ."
 fi # lib
 
+cd $SCRIPTDIR
 if [[ "$opt_sh" == "install" ]] || [[ "$opt_sh" == "cmake" ]]; then
-    echo "Preparing cmake file"
-    cd $SCRIPTDIR
+    echo "Preparing cmake file"    
     if [[ ! -d "./build" ]]; then
         mkdir -p build
     fi
@@ -82,7 +88,7 @@ fi
 
 if [[ $opt_sh == "install" ]] || [[ $opt_sh == "cmake" ]] || [[ $opt_sh == "build" ]]; then
     echo "Building ..."
-    cd $SCRIPTDIR/build && make && sudo make install
+    cd build && make && sudo make install
     if [[ $? == 0 ]]; then
         echo "Build successful"
         ls -l *ceUtil.so

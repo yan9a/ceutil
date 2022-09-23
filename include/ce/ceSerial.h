@@ -22,12 +22,14 @@
 namespace ce {
 
 class ceSerial {
+private:
 	char rxchar;
 	std::string port;
 	long baud;
 	long dsize;
 	char parity;
 	float stopbits;
+	bool stdbaud;
 #ifdef CE_WINDOWS
     HANDLE hComm; //handle
 	OVERLAPPED osReader;
