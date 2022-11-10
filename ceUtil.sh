@@ -14,7 +14,7 @@ else
  echo "You can input argument:"
  echo " 'install' : to install prerequisite packages, generate cmake files, build and install the lib"
  echo " 'cmake' : to generate cmake files, build, and install"
- echo " 'build': to build and install"
+ echo " 'build': to build and run"
  echo " ..."
  read -p "Input an option: " opt_sh
 fi
@@ -42,26 +42,13 @@ if [[ "$opt_sh" == "install" ]]; then
     read -p "Do you want to install required libraries [y/N]?: " opt_reqlib 
     if [ $opt_reqlib == "y" ] || [ $opt_reqlib == "Y" ]; then
         # install required lib
-        echo "Installing required lib ..."
-        # sudo apt update
-        sudo apt -y install build-essential cmake 
-
-        # for wxWidgets prerequisite
-        sudo apt -y install libgtk-3-dev checkinstall
-        sudo apt -y install libwxgtk3.0-gtk3-dev
-        wx-config --version
-
-        # opencv prerequisite
-        sudo apt -y install git pkg-config libavcodec-dev libavformat-dev libswscale-dev
-        sudo apt -y install libopencv-dev
-        pkg-config --modversion opencv
-        sudo sh -c "echo /usr/local/lib/ > /etc/ld.so.conf.d/opencv.conf"
-
-        #jsoncpp
-        sudo apt -y install libjsoncpp-dev     
-        sudo sh -c "echo /usr/local/lib/ > /etc/ld.so.conf.d/jsoncpp.conf"
-
-        sudo ldconfig
+        echo "Installing required lib ..."        
+        sudo apt update \
+        && apt install --no-install-recommends --no-install-suggests -y build-essential cmake \
+        libgtk-3-dev checkinstall libwxgtk3.0-gtk3-dev \
+        git pkg-config libavcodec-dev libavformat-dev libswscale-dev libopencv-dev \
+        libjsoncpp-dev apt-transport-https ca-certificates \
+        autoconf automake libtool 
     fi
     echo " ."
     echo " ."

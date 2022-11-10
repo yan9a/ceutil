@@ -1,22 +1,23 @@
 #!/bin/bash
-echo "Current directory $PWD"
-SCRIPTDIR=$PWD
-PRJNAME="testUdp"
-opt_sh="r"
+
+SCRIPTNAME=`basename "$0"`
+PRJNAME="${SCRIPTNAME%.*}"
+SCRIPTDIR="${0%/$PRJNAME.*}"
+echo "Project: $PRJNAME"
+echo "Script directory: $SCRIPTDIR"
 
 if [ $# == 1 ]; then
  opt_sh=$1
 else 
  echo "You can input argument:"
- echo " 'c': cmake"
- echo " 'b': build"
- echo " else: run" 
+ echo " 'cmake' : to generate cmake files, build, and install"
+ echo " 'build': to build and run"
  echo " ..."
  read -p "Input an option: " opt_sh
 fi
 
 if [[ "$opt_sh" == "" ]]; then
-    opt_sh="b"
+    opt_sh="build"
 fi
 
 echo "Option: $opt_sh"
@@ -24,10 +25,9 @@ echo " ."
 echo " ."
 echo " ."
 
-
-if [[ "$opt_sh" == "i" ]] || [[ "$opt_sh" == "c" ]]; then
+cd $SCRIPTDIR
+if [[ "$opt_sh" == "cmake" ]]; then
     echo "Preparing cmake file"
-    cd $SCRIPTDIR
     if [[ ! -d "./build" ]]; then
         mkdir -p build
     fi
@@ -42,7 +42,7 @@ if [[ "$opt_sh" == "i" ]] || [[ "$opt_sh" == "c" ]]; then
     echo " ."
 fi
 
-if [[ $opt_sh == "i" ]] || [[ $opt_sh == "c" ]] || [[ $opt_sh == "b" ]]; then
+if [[ $opt_sh == "cmake" ]] || [[ $opt_sh == "build" ]]; then
     echo "Building ..."
     cd $SCRIPTDIR/build && make # && sudo make install
     if [[ $? == 0 ]]; then
