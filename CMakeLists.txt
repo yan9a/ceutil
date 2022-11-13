@@ -1,14 +1,22 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.12)
 project (ceUtil)
 # set(CMAKE_CXX_STANDARD 11)
 # set(CMAKE_BUILD_TYPE Release)
 message(STATUS "Base dir = ${CMAKE_SOURCE_DIR}")
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(JSONCPP jsoncpp)
+link_libraries(${JSONCPP_LIBRARIES})
+include_directories(${JSONCPP_INCLUDE_DIRS})
+
 find_package(wxWidgets COMPONENTS core net base REQUIRED)
-find_package(OpenCV REQUIRED)
 include("${wxWidgets_USE_FILE}")
+
+find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIR})
+
 include_directories( ${CMAKE_SOURCE_DIR}/include )
-include_directories( /usr/include/jsoncpp )
+
 add_library(${PROJECT_NAME} 
 ${CMAKE_SOURCE_DIR}/src/ceDateTime.cpp
 ${CMAKE_SOURCE_DIR}/src/ceMmDateTime.cpp
@@ -27,7 +35,8 @@ ${CMAKE_SOURCE_DIR}/src/cewxcvMisc.cpp
 ${CMAKE_SOURCE_DIR}/src/ceModbus.cpp
 ${CMAKE_SOURCE_DIR}/src/ceWxSerial.cpp
 )
-target_link_libraries(${PROJECT_NAME} jsoncpp ${wxWidgets_LIBRARIES} ${OpenCV_LIBS})
+
+target_link_libraries(${PROJECT_NAME} ${JSONCPP_LIBRARIES} ${wxWidgets_LIBRARIES} ${OpenCV_LIBS})
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ce
         DESTINATION include 
