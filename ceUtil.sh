@@ -48,7 +48,7 @@ if [[ "$opt_sh" == "install" ]]; then
         libgtk-3-dev checkinstall libwxgtk3.0-gtk3-dev \
         git pkg-config libavcodec-dev libavformat-dev libswscale-dev libopencv-dev \
         libjsoncpp-dev apt-transport-https ca-certificates \
-        autoconf automake libtool 
+        autoconf automake libtool gdb cmake-extras
     fi
     echo " ."
     echo " ."
