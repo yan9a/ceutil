@@ -33,7 +33,7 @@ vector<char> ceMisc::hex2cvec(string str)
 std::string ceMisc::ToStr16(unsigned int u)
 {
 	ostringstream ss;
-	ss << setfill('0') << setw(2) << uppercase << hex << u << " ";
+	ss << setfill('0') << setw(2) << uppercase << hex << u;
 	return ss.str();
 }
 
