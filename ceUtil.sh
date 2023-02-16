@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# fix script
+# sed -i -e 's/\r$//' ceUtil.sh
+# chmod +x ceUtil.sh
+
 SCRIPTNAME=`basename "$0"`
 PRJNAME="${SCRIPTNAME%.*}"
 SCRIPTDIR="${0%/$PRJNAME.*}"
