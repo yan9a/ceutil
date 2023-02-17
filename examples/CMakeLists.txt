@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.0.0)
+project (ceutileg)
+message(STATUS "Base dir = ${CMAKE_SOURCE_DIR}")
+
+add_subdirectory(I2C)
+add_subdirectory(Log)
+add_subdirectory(Modbus)
+add_subdirectory(ModbusCmd)
+add_subdirectory(Serial)
+add_subdirectory(SerialGui)
+add_subdirectory(Timer)
+add_subdirectory(UDP)
+add_subdirectory(WxSerial)

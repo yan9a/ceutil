@@ -290,20 +290,20 @@ void MyFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 
 void MyFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
 {
-	if(_app->_com->Open()) this->WriteList(wxString::Format(wxT("Error opening port %s.\n"),_app->_com->GetPort()));
-	else this->WriteList(wxString::Format(wxT("Port %s is opened.\n"), _app->_com->GetPort()));
+	if(_app->_com->Open()) this->WriteList(wxString::Format(wxT("Error opening port %s.\n"),_app->_com->GetPort()).ToStdString());
+	else this->WriteList(wxString::Format(wxT("Port %s is opened.\n"), _app->_com->GetPort()).ToStdString());
 }
 
 void MyFrame::OnClose(wxCommandEvent& WXUNUSED(event))
 {
 	_app->_com->Close();
-	this->WriteList(wxString::Format(wxT("Port %s is closed.\n"), _app->_com->GetPort()));
+	this->WriteList(wxString::Format(wxT("Port %s is closed.\n"), _app->_com->GetPort()).ToStdString());
 }
 
 void MyFrame::SelPort(wxCommandEvent& WXUNUSED(event))
 {
 	if (_app->_com->IsOpened()) {
-		this->WriteList(wxString::Format(wxT("Close Port %s first.\n"), _app->_com->GetPort()));
+		this->WriteList(wxString::Format(wxT("Close Port %s first.\n"), _app->_com->GetPort()).ToStdString());
 	}
 	else {
         wxString cdev=wxString::Format(wxT("%s"), _app->_com->GetPort());
@@ -313,21 +313,21 @@ void MyFrame::SelPort(wxCommandEvent& WXUNUSED(event))
 			_app->_com->SetPortName(str);
 		}
 
-        this->WriteList(wxString::Format(wxT("Port: %s\n"), _app->_com->GetPort()));
+        this->WriteList(wxString::Format(wxT("Port: %s\n"), _app->_com->GetPort()).ToStdString());
 	}
 }
 
 void MyFrame::SetBaud(wxCommandEvent& WXUNUSED(event))
 {
 	if (_app->_com->IsOpened()) {
-		this->WriteList(wxString::Format(wxT("Close port %s first.\n"), _app->_com->GetPort()));
+		this->WriteList(wxString::Format(wxT("Close port %s first.\n"), _app->_com->GetPort()).ToStdString());
 	}
 	else {
 		long n = wxGetNumberFromUser(wxT("Enter the baud rate"), wxT("Baud rate"), wxT("Set Baud Rate"),_app->_com->GetBaudRate(),0, 1000000);
 		if (n >= 0) {
 			_app->_com->SetBaudRate(n);
 		}
-		this->WriteList(wxString::Format(wxT("Baud rate: %ld\n"), _app->_com->GetBaudRate()));
+		this->WriteList(wxString::Format(wxT("Baud rate: %ld\n"), _app->_com->GetBaudRate()).ToStdString());
 	}
 }
 

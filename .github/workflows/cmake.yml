@@ -10,6 +10,7 @@ env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
   WS_DIR: /__w/ceutil/ceutil
+  INSTALL_DIR: /usr/local
 
 jobs:
   build:
@@ -23,10 +24,13 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Configure CMake for Lib
-      run: cmake -B ${{env.WS_DIR}}/build -S ${{env.WS_DIR}} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      run: cmake -B ${{env.WS_DIR}}/build -S ${{env.WS_DIR}} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_INSTALL_PREFIX=${{env.INSTALL_DIR}}
 
     - name: Build Lib
       run: cmake --build ${{env.WS_DIR}}/build --config ${{env.BUILD_TYPE}}
+
+    - name: Install Lib
+      run: cmake --install ${{env.WS_DIR}}/build --config ${{env.BUILD_TYPE}}
 
     - name: Configure CMake for unit tests
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
@@ -34,7 +38,7 @@ jobs:
       # run: pwd && cmake -B ${{env.WS_DIR}}/test/build -S ${{env.WS_DIR}}/test -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
       run: cmake -B ${{env.WS_DIR}}/test/build -S ${{env.WS_DIR}}/test -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
-    - name: Build for unit tests
+    - name: Build unit tests
       # Build your program with the given configuration
       run: cmake --build ${{env.WS_DIR}}/test/build --config ${{env.BUILD_TYPE}}      
 
@@ -45,3 +49,9 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest -C ${{env.BUILD_TYPE}}
 
+    - name: Configure CMake for examples
+      run: cmake -B ${{env.WS_DIR}}/examples/build -S ${{env.WS_DIR}}/examples -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+    - name: Build examples
+      # Build your program with the given configuration
+      run: cmake --build ${{env.WS_DIR}}/examples/build --config ${{env.BUILD_TYPE}}

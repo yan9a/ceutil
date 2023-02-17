@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(ModbusCmd)
+project(Timer)
 
 set(ADDCV NO)
 # CMakeM1 checks ADDCV variable whether to include OpenCV
