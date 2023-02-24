@@ -32,6 +32,7 @@
 *.app
 
 build/
+buildw/
 cmake-build-debug/
 ceutil/
 .vs/
