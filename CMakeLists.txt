@@ -27,6 +27,7 @@ if(WIN32)
     if(ADDCV)
         find_package(OpenCV REQUIRED)
     endif()
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 else()
     # For linux  -------------------------------------------------------
     find_package(PkgConfig REQUIRED)
