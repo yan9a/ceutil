@@ -155,15 +155,15 @@ long ceSerial::Open()
         OPEN_EXISTING,
         FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED,
         0);
-    if (hComm == INVALID_HANDLE_VALUE) {return 1;}
+    if (hComm == INVALID_HANDLE_VALUE) {return -1;}
 
-    if (PurgeComm(hComm, PURGE_TXABORT | PURGE_RXABORT | PURGE_TXCLEAR | PURGE_RXCLEAR) == 0) {return 2;}//purge
+    if (PurgeComm(hComm, PURGE_TXABORT | PURGE_RXABORT | PURGE_TXCLEAR | PURGE_RXCLEAR) == 0) {return -1;}//purge
 
     //get initial state
     DCB dcbOri;
     bool fSuccess;
     fSuccess = GetCommState(hComm, &dcbOri);
-    if (!fSuccess) {return 3;}
+    if (!fSuccess) {return -1;}
 
     DCB dcb1 = dcbOri;
 
@@ -188,30 +188,30 @@ long ceSerial::Open()
     dcb1.fRtsControl = RTS_CONTROL_DISABLE;
     fSuccess = SetCommState(hComm, &dcb1);
     this->Delay(60);
-    if (!fSuccess) {return 4;}
+    if (!fSuccess) {return -1;}
 
     fSuccess = GetCommState(hComm, &dcb1);
-    if (!fSuccess) {return 5;}
+    if (!fSuccess) {return -1;}
 
     osReader = { 0 };// Create the overlapped event.
     // Must be closed before exiting to avoid a handle leak.
     osReader.hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
 
-    if (osReader.hEvent == NULL) {return 6;}// Error creating overlapped event; abort.
+    if (osReader.hEvent == NULL) {return -1;}// Error creating overlapped event; abort.
     fWaitingOnRead = FALSE;
 
     osWrite = { 0 };
     osWrite.hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
-    if (osWrite.hEvent == NULL) {return 7;}
+    if (osWrite.hEvent == NULL) {return -1;}
 
-    if (!GetCommTimeouts(hComm, &timeouts_ori)) { return 8; } // Error getting time-outs.
+    if (!GetCommTimeouts(hComm, &timeouts_ori)) { return -1; } // Error getting time-outs.
     COMMTIMEOUTS timeouts;
     timeouts.ReadIntervalTimeout = 20;
     timeouts.ReadTotalTimeoutMultiplier = 15;
     timeouts.ReadTotalTimeoutConstant = 100;
     timeouts.WriteTotalTimeoutMultiplier = 15;
     timeouts.WriteTotalTimeoutConstant = 100;
-    if (!SetCommTimeouts(hComm, &timeouts)) { return 9;} // Error setting time-outs.
+    if (!SetCommTimeouts(hComm, &timeouts)) { return -1;} // Error setting time-outs.
 	return 0;
 }
 
