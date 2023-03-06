@@ -17,11 +17,11 @@
 #include "wx/socket.h"
 // this example is currently written to use only IP or only IPv6 sockets, it
 // should be extended to allow using either in the future
-#if wxUSE_IPV6
-typedef wxIPV6address IPaddress;
-#else
+//#if wxUSE_IPV6
+//typedef wxIPV6address IPaddress;
+//#else
 typedef wxIPV4address IPaddress;
-#endif
+//#endif
 
 namespace ce {
 class ceUDP : public wxEvtHandler {
