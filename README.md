@@ -6,6 +6,9 @@ You can get the ceUtil source from its repository using the following command.
 
     git clone --depth 1 https://github.com/yan9a/ceutil.git
 
+For Windows 11 systems wxUSE_IPV6 will be enabled by default, and the IP address type will be wxIPVaddress.
+If you want to use wxIPV4address for ceUDP, you can change IPAddress definition at line 21 of ceUDP.h file.
+
 ## Linux Setup
 
 After cloning the repository, you can use the following command to install the library.
