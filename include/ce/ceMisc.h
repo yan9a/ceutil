@@ -15,6 +15,13 @@
 #include <iomanip>
 #include "ce/ceMacros.h" // macros
 
+#if defined(CE_WINDOWS)
+#include<windows.h>
+#else
+#include <limits.h>
+#include <unistd.h>
+#endif 
+
 namespace ce {
 class ceMisc {
 private:
@@ -37,6 +44,9 @@ public:
 	static std::vector<char> str2cvec(std::string str); // string to char vector
 	static std::string f2s(float f, int n = 1); // float to string
 	static std::vector<std::string> splitStr(std::string str, std::string delimiter);
+
+	static std::string exepath(); // get the path of executing binary program
+	static std::string exedir(); // get the directory of executing binary program
 };
 
 } // namespace ce

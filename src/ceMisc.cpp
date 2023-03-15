@@ -137,4 +137,23 @@ vector<string> ceMisc::splitStr(string str, string delimiter)
 	return tokens;
 }
 
+std::string ceMisc::exepath()
+{
+#ifdef CE_WINDOWS
+	char result[MAX_PATH];
+	return std::string(result, GetModuleFileName(NULL, result, MAX_PATH));
+#else
+	char result[PATH_MAX];
+	ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
+	return std::string(result, (count > 0) ? count : 0);
+#endif
+}
+
+std::string ceMisc::exedir()
+{
+	std::string str = exepath();
+	std::size_t found = str.find_last_of("/\\");
+	return str.substr(0, found + 1);
+}
+
 } // namespace ce
