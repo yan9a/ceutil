@@ -67,7 +67,7 @@ if [[ "$opt_sh" == "install" ]] || [[ "$opt_sh" == "cmake" ]]; then
     fi
     rm -r ./build/*
     cd build
-    cmake \
+    cmake -D CMAKE_BUILD_TYPE=Release \
     -D BUILD_SHARED_LIBS=ON \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     ..
