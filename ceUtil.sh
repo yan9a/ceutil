@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # fix script
-# sed -i -e 's/\r$//' ceUtil.sh
-# chmod +x ceUtil.sh
+# sed -i -e 's/\r$//' ceutil.sh
+# chmod +x ceutil.sh
 
 SCRIPTNAME=`basename "$0"`
 PRJNAME="${SCRIPTNAME%.*}"
@@ -67,7 +67,7 @@ if [[ "$opt_sh" == "install" ]] || [[ "$opt_sh" == "cmake" ]]; then
     fi
     rm -r ./build/*
     cd build
-    cmake -D CMAKE_BUILD_TYPE=Release \
+    cmake \
     -D BUILD_SHARED_LIBS=ON \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     ..
@@ -82,10 +82,10 @@ if [[ $opt_sh == "install" ]] || [[ $opt_sh == "cmake" ]] || [[ $opt_sh == "buil
     cd build && make && sudo make install
     if [[ $? == 0 ]]; then
         echo "Build successful"
-        ls -l *ceUtil.so
-        ldd *ceUtil.so
-        # ls -l *$ceUtil.a
-        # ar -t *$ceUtil.a
+        ls -l *ceutil.so
+        ldd *ceutil.so
+        # ls -l *$ceutil.a
+        # ar -t *$ceutil.a
     else
         echo "Error in compiling"
     fi  

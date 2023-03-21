@@ -1,5 +1,5 @@
 # CMakeM1 checks ADDCV variable whether to include OpenCV 
-# together with ceUtil, wxWidgets, and jsoncpp
+# together with ceutil, wxWidgets, and jsoncpp
 # and return LIBS variable with the list of libraries to link 
 # and also set WIN32OPT variable with WIN32 for Windows
 
@@ -45,9 +45,9 @@ else()
 endif()
 #  ------------------------------------------------------------------
 if(ADDCV)
-    set(LIBS ceUtil ${JSONCPP_LIBRARIES} ${wxWidgets_LIBRARIES} ${OpenCV_LIBS})
+    set(LIBS ceutil ${JSONCPP_LIBRARIES} ${wxWidgets_LIBRARIES} ${OpenCV_LIBS})
 else()
-    set(LIBS ceUtil ${JSONCPP_LIBRARIES} ${wxWidgets_LIBRARIES})
+    set(LIBS ceutil ${JSONCPP_LIBRARIES} ${wxWidgets_LIBRARIES})
 endif()
 message(STATUS "LIBS = ${LIBS}")
 message(STATUS "WIN32OPT = ${WIN32OPT}")
