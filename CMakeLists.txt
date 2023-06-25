@@ -27,6 +27,7 @@ if(WIN32)
     if(ADDCV)
         find_package(OpenCV REQUIRED)
     endif()
+    find_package(OpenSSL REQUIRED)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 else()
     # For linux  -------------------------------------------------------
@@ -40,12 +41,16 @@ else()
         find_package(OpenCV REQUIRED)
         include_directories(${OpenCV_INCLUDE_DIR})
     endif()
+    find_package(OpenSSL REQUIRED)
 endif()
 #  ------------------------------------------------------------------
+set(LIBS 
+    ${JSONCPP_LIBRARIES} 
+    ${wxWidgets_LIBRARIES}
+    OpenSSL::SSL OpenSSL::Crypto
+)
 if(ADDCV)
-    set(LIBS ${JSONCPP_LIBRARIES} ${wxWidgets_LIBRARIES} ${OpenCV_LIBS})
-else()
-    set(LIBS ${JSONCPP_LIBRARIES} ${wxWidgets_LIBRARIES})
+    set(LIBS ${LIBS} ${OpenCV_LIBS})
 endif()
 message(STATUS "List of libraries = ${LIBS}")
 include_directories(${PROJECT_SOURCE_DIR}/include)
@@ -66,6 +71,8 @@ ${PROJECT_SOURCE_DIR}/src/ceConfig.cpp
 ${PROJECT_SOURCE_DIR}/src/ceModbus.cpp
 ${PROJECT_SOURCE_DIR}/src/ceWxSerial.cpp
 ${PROJECT_SOURCE_DIR}/src/cewxcvMisc.cpp
+${PROJECT_SOURCE_DIR}/src/ceDES.cpp
+${PROJECT_SOURCE_DIR}/src/ceSHA1.cpp
 )
 target_link_libraries(${PROJECT_NAME} ${LIBS})
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)

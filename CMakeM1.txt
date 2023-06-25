@@ -15,10 +15,12 @@ if(WIN32)
     message(STATUS "vcpkg dir = $ENV{VCPKGDIR}")
     if("${CMAKE_SIZEOF_VOID_P}" STREQUAL "4")
         # if 32 bits
+        message(STATUS "Generator x86-windows")
         include_directories($ENV{VCPKGDIR}/installed/x86-windows/include)
         link_directories($ENV{VCPKGDIR}/installed/x86-windows/lib)
     else()
         # if 64 bits
+        message(STATUS "Generator x64-windows")
         include_directories($ENV{VCPKGDIR}/installed/x64-windows/include)
         link_directories($ENV{VCPKGDIR}/installed/x64-windows/lib)
     endif()
@@ -28,6 +30,7 @@ if(WIN32)
     if(ADDCV)
         find_package(OpenCV REQUIRED)
     endif()
+    find_package(OpenSSL REQUIRED)
     set(WIN32OPT WIN32)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 else()
@@ -42,12 +45,18 @@ else()
         find_package(OpenCV REQUIRED)
         include_directories(${OpenCV_INCLUDE_DIR})
     endif()
+    find_package(OpenSSL REQUIRED)
 endif()
 #  ------------------------------------------------------------------
+set(LIBS 
+    ceutil 
+    ${JSONCPP_LIBRARIES} 
+    ${wxWidgets_LIBRARIES}
+    OpenSSL::SSL OpenSSL::Crypto    
+    )
 if(ADDCV)
-    set(LIBS ceutil ${JSONCPP_LIBRARIES} ${wxWidgets_LIBRARIES} ${OpenCV_LIBS})
-else()
-    set(LIBS ceutil ${JSONCPP_LIBRARIES} ${wxWidgets_LIBRARIES})
+    set(LIBS ${LIBS} ${OpenCV_LIBS})
 endif()
+
 message(STATUS "LIBS = ${LIBS}")
 message(STATUS "WIN32OPT = ${WIN32OPT}")

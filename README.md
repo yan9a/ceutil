@@ -74,6 +74,7 @@ We can use vcpkg to install required libraries for ceUtil. Install vcpkg and set
     .\vcpkg install opencv:x64-windows
     .\vcpkg install jsoncpp:x64-windows
     .\vcpkg install wxwidgets:x64-windows
+    .\vcpkg install openssl:x64-windows
 
 You might need to add the preprocessor definition WXUSINGDLL if the project did not previously reference wxWidgets.
 
@@ -92,3 +93,7 @@ Open visual studio solution in the ceutil sub-directory and build for x64 releas
 ### Open an Example Project
 
 After setting up the requried libraries, you can now open an example solution in examples directory of the cloned repository.
+
+### Docker
+
+Docker image 'yan9a/cebian' has all the required libraries for ceUtil setup. Its Dockerfile can also be found in the root folder.

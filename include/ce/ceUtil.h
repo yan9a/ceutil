@@ -55,4 +55,10 @@
 // ceWxSerial
 #include "ce/ceWxSerial.h"
 
+// DES
+#include "ce/ceDES.h"
+
+// SHA1
+#include "ce/ceSHA1.h"
+
 #endif // CE_UTIL_H
