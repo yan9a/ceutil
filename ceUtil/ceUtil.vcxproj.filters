@@ -128,7 +128,7 @@
     <ClCompile Include="..\src\ceDES.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\ceSHA1.c">
+    <ClCompile Include="..\src\ceSHA1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

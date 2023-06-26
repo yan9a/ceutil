@@ -54,7 +54,7 @@
     <ClCompile Include="..\src\ceModbus.cpp" />
     <ClCompile Include="..\src\cePCA9535.cpp" />
     <ClCompile Include="..\src\ceSerial.cpp" />
-    <ClCompile Include="..\src\ceSHA1.c" />
+    <ClCompile Include="..\src\ceSHA1.cpp" />
     <ClCompile Include="..\src\ceUDP.cpp" />
     <ClCompile Include="..\src\cewxcvMisc.cpp" />
     <ClCompile Include="..\src\ceWxSerial.cpp" />

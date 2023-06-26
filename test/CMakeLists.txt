@@ -6,3 +6,6 @@ enable_testing()
 
 add_subdirectory(testJson)
 add_test(NAME testJson COMMAND testJson)
+
+add_subdirectory(testSHA1)
+add_test(NAME testSHA1 COMMAND testSHA1)

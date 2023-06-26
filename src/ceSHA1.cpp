@@ -51,10 +51,10 @@ A million repetitions of "a"
 #define R3(v,w,x,y,z,i) z+=(((w|x)&y)|(w&x))+blk(i)+0x8F1BBCDC+rol(v,5);w=rol(w,30);
 #define R4(v,w,x,y,z,i) z+=(w^x^y)+blk(i)+0xCA62C1D6+rol(v,5);w=rol(w,30);
 
-
+namespace ce {
 /* Hash a single 512-bit block. This is the core of the algorithm. */
 
-void SHA1Transform(
+void ceSHA1::SHA1Transform(
     uint32_t state[5],
     const unsigned char buffer[64]
 )
@@ -182,7 +182,7 @@ void SHA1Transform(
 
 /* SHA1Init - Initialize new context */
 
-void SHA1Init(
+void ceSHA1::SHA1Init(
     SHA1_CTX * context
 )
 {
@@ -198,7 +198,7 @@ void SHA1Init(
 
 /* Run your data through this. */
 
-void SHA1Update(
+void ceSHA1::SHA1Update(
     SHA1_CTX * context,
     const unsigned char *data,
     uint32_t len
@@ -231,7 +231,7 @@ void SHA1Update(
 
 /* Add padding and return the message digest. */
 
-void SHA1Final(
+void ceSHA1::SHA1Final(
     unsigned char digest[20],
     SHA1_CTX * context
 )
@@ -282,7 +282,7 @@ void SHA1Final(
     memset(&finalcount, '\0', sizeof(finalcount));
 }
 
-void SHA1(
+void ceSHA1::SHA1(
     char *hash_out,
     const char *str,
     uint32_t len)
@@ -296,3 +296,22 @@ void SHA1(
     SHA1Final((unsigned char *)hash_out, &ctx);
 }
 
+void ceSHA1::Init()
+{
+    SHA1Init(&sha);
+}
+
+void ceSHA1::Update(std::string str)
+{
+    SHA1Update(&sha, (uint8_t*)str.c_str(), str.length());
+}
+
+std::string ceSHA1::Final()
+{
+    uint8_t results[20];
+    SHA1Final(results, &sha);
+    std::string r((char*)results, 20);
+    return r;
+}
+
+} // namespace ce 
