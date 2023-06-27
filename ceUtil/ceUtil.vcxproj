@@ -32,6 +32,7 @@
     <ClInclude Include="..\include\ce\ceMmDateTime.h" />
     <ClInclude Include="..\include\ce\ceModbus.h" />
     <ClInclude Include="..\include\ce\cePCA9535.h" />
+    <ClInclude Include="..\include\ce\ceRSA_OS.h" />
     <ClInclude Include="..\include\ce\ceSerial.h" />
     <ClInclude Include="..\include\ce\ceSHA1.h" />
     <ClInclude Include="..\include\ce\ceUDP.h" />
@@ -53,6 +54,7 @@
     <ClCompile Include="..\src\ceMmDateTime.cpp" />
     <ClCompile Include="..\src\ceModbus.cpp" />
     <ClCompile Include="..\src\cePCA9535.cpp" />
+    <ClCompile Include="..\src\ceRSA_OS.cpp" />
     <ClCompile Include="..\src\ceSerial.cpp" />
     <ClCompile Include="..\src\ceSHA1.cpp" />
     <ClCompile Include="..\src\ceUDP.cpp" />

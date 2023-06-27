@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.0.0)
-project (ceutil VERSION 1.0.2)
+project (ceutil VERSION 1.1.0)
+# version 1.1.0 Added DES, SHA, RSA
+
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -73,6 +75,7 @@ ${PROJECT_SOURCE_DIR}/src/ceWxSerial.cpp
 ${PROJECT_SOURCE_DIR}/src/cewxcvMisc.cpp
 ${PROJECT_SOURCE_DIR}/src/ceDES.cpp
 ${PROJECT_SOURCE_DIR}/src/ceSHA1.cpp
+${PROJECT_SOURCE_DIR}/src/ceRSA_OS.cpp
 )
 target_link_libraries(${PROJECT_NAME} ${LIBS})
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
