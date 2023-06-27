@@ -12,10 +12,6 @@
 #include "stdint.h"
 #include <string>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
-
     namespace ce {
         typedef struct
         {
@@ -57,8 +53,5 @@ extern "C" {
             std::string Final();
         };
     } // namespace ce 
-#if defined(__cplusplus)
-}
-#endif
 
 #endif /* SHA1_H */
