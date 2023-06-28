@@ -19,38 +19,41 @@
 #include <openssl/bn.h>
 #include <algorithm>
 namespace ce {
-class ceRSA_OS {
-public:
-    // ----------------------------------------------------------------------------
-    static std::string bn2str(BIGNUM* bigN);
-     
-    // Load public key from file
-    static RSA* loadPublicKey(std::string publicKeyFile);
+    class ceRSA_OS {
+    public:
+        // ----------------------------------------------------------------------------
+        static std::string bn2str(BIGNUM* bigN);
 
-    // Load private key from file
-    static RSA* loadPrivateKey(std::string privateKeyFile);
+        // Load public key from file
+        static RSA* loadPublicKey(std::string publicKeyFile);
 
-    // Encrypt data using public key
-    static std::string encrypt(const std::string& message, RSA* rsa_key);
+        // Load private key from file
+        static RSA* loadPrivateKey(std::string privateKeyFile);
 
-    // Decrypt data using private key
-    static std::string decrypt(const std::string& ciphertext, RSA* rsa_key);
+        // Encrypt data using public key
+        static std::string encrypt(const std::string& message, RSA* rsa_key);
 
-    // Generate a public-private key pair and save to files
-    static RSA* generateKeyPair(std::string publicKeyFile, std::string privateKeyFile, int bit_len = 2048, int exp = 3);
+        // Decrypt data using private key
+        static std::string decrypt(const std::string& ciphertext, RSA* rsa_key);
 
-    // Encrypt data using public key
-    static std::string encrypt(const std::string& message, std::string publicKeyFile);
+        // Generate a public-private key pair and save to files
+        static RSA* generateKeyPair(std::string publicKeyFile, std::string privateKeyFile, int bit_len = 2048, int exp = 3);
 
-    // Decrypt data using private key
-    static std::string decrypt(const std::string& ciphertext, std::string privateKeyFile);
+        // Encrypt data using public key
+        static std::string encrypt(const std::string& message, std::string publicKeyFile);
 
-    // Encrypt data using modulus n and exponent e
-    static std::string encrypt(const std::string& message, std::string n, std::string e);
+        // Decrypt data using private key
+        static std::string decrypt(const std::string& ciphertext, std::string privateKeyFile);
 
-    // Decrypt data using secret number d, modulus n and exponent e
-    static std::string decrypt(const std::string& ciphertext, std::string d, std::string n, std::string e);
-};
+        // Encrypt data using modulus n and exponent e
+        static std::string encrypt(const std::string& message, std::string n, std::string e);
+
+        // Decrypt data using secret number d, modulus n and exponent e
+        static std::string decrypt(const std::string& ciphertext, std::string d, std::string n, std::string e);
+
+        // Get big numbers as strings for secret number d, modulus n and exponent e as reference from RSA key
+        static void getBN(RSA* key, std::string& d, std::string& n, std::string& e);
+    };
 } // namespace ce 
 
 #endif // CERSA_OS_H

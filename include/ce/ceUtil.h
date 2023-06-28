@@ -61,4 +61,7 @@
 // SHA1
 #include "ce/ceSHA1.h"
 
+// RSA OpenSSL
+#include "ce/ceRSA_OS.h"
+
 #endif // CE_UTIL_H

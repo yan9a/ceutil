@@ -42,7 +42,7 @@ std::string ceRSA_OS::encrypt(const std::string& message, RSA* rsa_key) {
     //ciphertext.data(), rsa_key, RSA_PKCS1_PADDING);
 
     if (len < 0) {
-        std::cerr << "Encryption failed" << std::endl;
+        // std::cerr << "Encryption failed" << std::endl;
         return "";
     }
 
@@ -58,7 +58,7 @@ std::string ceRSA_OS::decrypt(const std::string& ciphertext, RSA* rsa_key) {
         message.data(), rsa_key, RSA_NO_PADDING);
 
     if (len < 0) {
-        std::cerr << "Decryption failed" << std::endl;
+        // std::cerr << "Decryption failed" << std::endl;
         return "";
     }
 
@@ -155,6 +155,19 @@ std::string ceRSA_OS::decrypt(const std::string& ciphertext, std::string d, std:
 
     std::string decrypted = decrypt(ciphertext, private_key3);
     return decrypted;
+}
+
+// Get big numbers as strings for secret number d, modulus n and exponent e as reference from RSA key
+void ceRSA_OS::getBN(RSA* key, std::string& d, std::string& n, std::string& e)
+{
+    // Obtain the key components as BIGNUM
+    BIGNUM* bn_d = BN_dup(RSA_get0_d(key));
+    BIGNUM* bn_e = BN_dup(RSA_get0_e(key));
+    BIGNUM* bn_n = BN_dup(RSA_get0_n(key));
+
+    d = bn2str(bn_d);
+    e = bn2str(bn_e);
+    n = bn2str(bn_n);
 }
 
 // ----------------------------------------------------------------------------
