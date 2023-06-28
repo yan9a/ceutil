@@ -28,6 +28,7 @@ private:
 public:	
 	static std::string alnum(std::string str); // filter the string for alphanumeric characters only
 	static std::vector<char> hex2cvec(std::string str); // convert hex string to char vector
+	static std::string hex2str(std::string str); // convert hex string to byte string
 	static std::string cvec2hex(std::vector<char> bv); // convert char vector to hex string	
 
 	static std::string ToStr16(unsigned int u);// to hexadecimal string
@@ -36,6 +37,7 @@ public:
 	static std::string ToStr16(char c);// to hexadecimal string
 	static std::string ToStr16(std::vector<char> bv, std::string separator = "", std::string prefix = "", std::string postfix = "");// to hexadecimal string
 	static std::string ToStr16(std::vector<unsigned char> bv, std::string separator = "", std::string prefix = "", std::string postfix = "");// to hexadecimal string
+	static std::string ToStr16(std::string str, std::string separator = "", std::string prefix = "", std::string postfix = "");// to hexadecimal string
 	
 	static std::string cvec2str(std::vector<char> bv); // convert char vector to string
 	static std::vector<char> cptr2cvec(char* cstr, int n); // char* to char vector	

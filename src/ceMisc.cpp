@@ -29,6 +29,12 @@ vector<char> ceMisc::hex2cvec(string str)
 	return v;
 }
 
+// convert hex string to byte string
+std::string ceMisc::hex2str(std::string str)
+{
+	return ceMisc::cvec2str(ceMisc::hex2cvec(str));
+}
+
 // convert to hexadecimal string 
 std::string ceMisc::ToStr16(unsigned int u)
 {
@@ -69,6 +75,12 @@ std::string ceMisc::ToStr16(std::vector<unsigned char> bv, std::string separator
 		if (&c != &bv.back()) ss << separator;
 	}
 	return ss.str();
+}
+
+// to hexadecimal string
+std::string ceMisc::ToStr16(std::string str, std::string separator, std::string prefix, std::string postfix)
+{
+	return ceMisc::ToStr16(ceMisc::str2cvec(str), separator, prefix, postfix);
 }
 
 // convert char vector to hex string
