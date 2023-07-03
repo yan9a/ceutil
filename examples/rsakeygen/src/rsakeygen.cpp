@@ -12,7 +12,8 @@ int main(){
 
 	cout << "Enter exponent [3]: ";
 	cin >> exp;
-	RSA* private_key = ceRSA_OS::generateKeyPair("public_key.pem", "private_key.pem", bit_len, exp);
+	// RSA* private_key = ceRSA_OS::generateKeyPair("public_key.pem", "private_key.pem", bit_len, exp); // use this to save key files
+	RSA* private_key = ceRSA_OS::generateKeyPair(bit_len, exp);
 
 	string dstr;
 	string estr;

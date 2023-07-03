@@ -78,7 +78,7 @@ string ceRSA_OS::bn2str(BIGNUM* bigN)
 // ----------------------------------------------------------------------------
 
 // Generate a public-private key pair and save to files
-RSA* ceRSA_OS::generateKeyPair(std::string publicKeyFile, std::string privateKeyFile, int keyLength, int exp) {
+RSA* ceRSA_OS::generateKeyPair(std::string publicKeyFile, std::string privateKeyFile, uint32_t keyLength, uint32_t exp) {
     RSA* keypair = RSA_new();
     BIGNUM* e = BN_new();
     BN_set_word(e, exp);
@@ -92,6 +92,16 @@ RSA* ceRSA_OS::generateKeyPair(std::string publicKeyFile, std::string privateKey
     PEM_write_RSAPrivateKey(bigN, keypair, NULL, NULL, 0, NULL, NULL);
     fclose(bigN);
 
+    BN_free(e);
+    return keypair;
+}
+
+// Generate a public-private key pair and returns RSA
+RSA* ceRSA_OS::generateKeyPair(uint32_t keyLength, uint32_t exp) {
+    RSA* keypair = RSA_new();
+    BIGNUM* e = BN_new();
+    BN_set_word(e, exp);
+    RSA_generate_key_ex(keypair, keyLength, e, NULL);
     BN_free(e);
     return keypair;
 }

@@ -37,7 +37,10 @@ namespace ce {
         static std::string decrypt(const std::string& ciphertext, RSA* rsa_key);
 
         // Generate a public-private key pair and save to files
-        static RSA* generateKeyPair(std::string publicKeyFile, std::string privateKeyFile, int bit_len = 2048, int exp = 3);
+        static RSA* generateKeyPair(std::string publicKeyFile, std::string privateKeyFile, uint32_t bit_len = 2048, uint32_t exp = 3);
+
+        // Generate a public-private key pair and returns RSA
+        static RSA* generateKeyPair(uint32_t bit_len = 2048, uint32_t exp = 3);
 
         // Encrypt data using public key
         static std::string encrypt(const std::string& message, std::string publicKeyFile);
