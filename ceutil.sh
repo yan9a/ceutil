@@ -48,7 +48,7 @@ if [[ "$opt_sh" == "install" ]]; then
         # install required lib
         echo "Installing required lib ..."        
         sudo apt update \
-        && apt install --no-install-recommends --no-install-suggests -y build-essential cmake \
+        && sudo apt install --no-install-recommends --no-install-suggests -y build-essential cmake \
         libgtk-3-dev checkinstall libwxgtk3.0-gtk3-dev \
         git pkg-config libavcodec-dev libavformat-dev libswscale-dev libopencv-dev \
         libjsoncpp-dev apt-transport-https ca-certificates \
