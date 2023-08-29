@@ -23,7 +23,7 @@ vector<char> ceMisc::hex2cvec(string str)
 {
 	vector<char> v;
 	str = ceMisc::alnum(str);// filter for alphanumeric characters
-	int n = str.length();
+	int n = (int)str.length();
 	for (int i = 0; i < n; i += 2) 
 		v.push_back((char)stoi(str.substr(i, 2), NULL, 16));
 	return v;
@@ -166,6 +166,54 @@ std::string ceMisc::exedir()
 	std::string str = exepath();
 	std::size_t found = str.find_last_of("/\\");
 	return str.substr(0, found + 1);
+}
+
+bool ceMisc::kb_hit() // check keyboard hit
+{
+#if defined(CE_WINDOWS)
+	return _kbhit();
+#else
+	// https://stackoverflow.com/questions/29335758/using-kbhit-and-getch-on-linux
+	termios term;
+	tcgetattr(0, &term);
+
+	termios term2 = term;
+	term2.c_lflag &= ~ICANON;
+	tcsetattr(0, TCSANOW, &term2);
+
+	int byteswaiting;
+	ioctl(0, FIONREAD, &byteswaiting);
+
+	tcsetattr(0, TCSANOW, &term);
+
+	return byteswaiting > 0;
+#endif 
+}
+
+char ceMisc::get_ch() // get char
+{
+#if defined(CE_WINDOWS)
+	return _getch();
+#else
+	//https://stackoverflow.com/questions/421860/capture-characters-from-standard-input-without-waiting-for-enter-to-be-pressed
+	char buf = 0;
+	struct termios old = { 0 };
+	if (tcgetattr(0, &old) < 0)
+		perror("tcsetattr()");
+	old.c_lflag &= ~ICANON;
+	old.c_lflag &= ~ECHO;
+	old.c_cc[VMIN] = 1;
+	old.c_cc[VTIME] = 0;
+	if (tcsetattr(0, TCSANOW, &old) < 0)
+		perror("tcsetattr ICANON");
+	if (read(0, &buf, 1) < 0)
+		perror("read()");
+	old.c_lflag |= ICANON;
+	old.c_lflag |= ECHO;
+	if (tcsetattr(0, TCSADRAIN, &old) < 0)
+		perror("tcsetattr ~ICANON");
+	return (buf);
+#endif
 }
 
 } // namespace ce

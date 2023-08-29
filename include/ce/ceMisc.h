@@ -17,9 +17,12 @@
 
 #if defined(CE_WINDOWS)
 #include<windows.h>
+#include<conio.h> // for kbhit
 #else
 #include <limits.h>
 #include <unistd.h>
+#include <sys/ioctl.h> // for kbhit
+#include <termios.h> // "
 #endif 
 
 namespace ce {
@@ -49,6 +52,9 @@ public:
 
 	static std::string exepath(); // get the path of executing binary program
 	static std::string exedir(); // get the directory of executing binary program
+
+	static bool kb_hit(); // check keyboard hit
+	static char get_ch(); // get char
 };
 
 } // namespace ce
