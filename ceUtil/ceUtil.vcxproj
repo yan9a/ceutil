@@ -36,7 +36,7 @@
     <ClInclude Include="..\include\ce\ceSerial.h" />
     <ClInclude Include="..\include\ce\ceSHA1.h" />
     <ClInclude Include="..\include\ce\ceUDP.h" />
-    <ClInclude Include="..\include\ce\ceUtil.h" />
+    <ClInclude Include="..\include\ce\ceutil.h" />
     <ClInclude Include="..\include\ce\cewxcvMisc.h" />
     <ClInclude Include="..\include\ce\ceWxSerial.h" />
     <ClInclude Include="..\include\ce\ceWxTmr.h" />
@@ -66,7 +66,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{5397B256-872B-44E9-A100-8EE02B070E5A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ceUtil</RootNamespace>
+    <RootNamespace>ceutil</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -116,15 +116,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(VCPKGDIR)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(VCPKGDIR)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(VCPKGDIR)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(VCPKGDIR)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
