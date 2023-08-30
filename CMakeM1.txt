@@ -11,18 +11,18 @@ message(STATUS "Project version = ${CMAKE_PROJECT_VERSION}")
 
 if(WIN32)
     # For windows -------------------------------------------------------
-    # Set VCPKGDIR environmental variable for vcpkg root folder
-    message(STATUS "vcpkg dir = $ENV{VCPKGDIR}")
+    # Set VCPKG_ROOT environmental variable for vcpkg root folder
+    message(STATUS "vcpkg dir = $ENV{VCPKG_ROOT}")
     if("${CMAKE_SIZEOF_VOID_P}" STREQUAL "4")
         # if 32 bits
         message(STATUS "Generator x86-windows")
-        include_directories($ENV{VCPKGDIR}/installed/x86-windows/include)
-        link_directories($ENV{VCPKGDIR}/installed/x86-windows/lib)
+        include_directories($ENV{VCPKG_ROOT}/installed/x86-windows/include)
+        link_directories($ENV{VCPKG_ROOT}/installed/x86-windows/lib)
     else()
         # if 64 bits
         message(STATUS "Generator x64-windows")
-        include_directories($ENV{VCPKGDIR}/installed/x64-windows/include)
-        link_directories($ENV{VCPKGDIR}/installed/x64-windows/lib)
+        include_directories($ENV{VCPKG_ROOT}/installed/x64-windows/include)
+        link_directories($ENV{VCPKG_ROOT}/installed/x64-windows/lib)
     endif()
     find_package(jsoncpp REQUIRED)
     set(JSONCPP_LIBRARIES jsoncpp)

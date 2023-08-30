@@ -76,11 +76,11 @@ We can use vcpkg to install required libraries for ceutil. Install vcpkg and set
     .\vcpkg install wxwidgets:x64-windows
     .\vcpkg install openssl:x64-windows
 
-After cloning the vcpkg repository, add an environmental variable called 'VCPKGDIR' for the cloned directory path. For example, if you cloned the repository at "C:\Users\aye\vcpkg" and find the bootstrap-vcpkg.bat file in that folder. You can define VCPKGDIR as system variables in "Environment Variables"
+After cloning the vcpkg repository, add an environmental variable called 'VCPKG_ROOT' for the cloned directory path. For example, if you cloned the repository at "C:\Users\aye\vcpkg" and find the bootstrap-vcpkg.bat file in that folder. You can define VCPKG_ROOT as system variables in "Environment Variables"
 
     System variables
       Variable          Value
-      VCPKGDIR             C:\Users\aye\vcpkg   
+      VCPKG_ROOT             C:\Users\aye\vcpkg   
 
 ### Setup ceutil 
 
@@ -88,13 +88,13 @@ After cloning the vcpkg repository, add an environmental variable called 'VCPKGD
 
 Open visual studio solution in the ceutil sub-directory and build for x64 release and debug configurations.
 You might need to add the preprocessor definition WXUSINGDLL if the project did not previously reference wxWidgets.
-Compiled library will be installed in %VCPKGDIR%\installed\$(Platform) under respective configuration. It will also install the include files under "$(VCPKGDIR)\installed\include".
+Compiled library will be installed in $(VCPKG_ROOT)\installed\$(Platform) under respective configuration. It will also install the include files under "$(VCPKG_ROOT)\installed\include".
 
 
 #### Developer Command Prompt
 
-You can also compile the library by opening "Developer Command Prompt for VS" and running ceutilw.bat. That will install the libraries under %VCPKGDIR%\installed under respective platform and configuration.
-It will also install the include files under "%VCPKGDIR%\installed\$(Platform)\include".
+You can also compile the library by opening "Developer Command Prompt for VS" and running ceutilw.bat. That will install the libraries under $(VCPKG_ROOT)\installed under respective platform and configuration.
+It will also install the include files under "$(VCPKG_ROOT)\installed\$(Platform)\include".
 
 ### Open an Example Project
 

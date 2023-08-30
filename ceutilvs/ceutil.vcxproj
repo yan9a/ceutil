@@ -116,19 +116,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(VCPKGDIR)\installed\$(Configuration)\</OutDir>
+    <OutDir>$(VCPKG_ROOT)\installed\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(VCPKGDIR)\installed\$(Configuration)\</OutDir>
+    <OutDir>$(VCPKG_ROOT)\installed\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(VCPKGDIR)\installed\$(Configuration)\</OutDir>
+    <OutDir>$(VCPKG_ROOT)\installed\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(VCPKGDIR)\installed\$(Configuration)\</OutDir>
+    <OutDir>$(VCPKG_ROOT)\installed\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -146,7 +146,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)..\include" "$(VCPKGDIR)\installed\include" /E /H /C /I /Y</Command>
+      <Command>xcopy "$(SolutionDir)..\include" "$(VCPKG_ROOT)\installed\include" /E /H /C /I /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -165,7 +165,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)..\include" "$(VCPKGDIR)\installed\include" /E /H /C /I /Y</Command>
+      <Command>xcopy "$(SolutionDir)..\include" "$(VCPKG_ROOT)\installed\include" /E /H /C /I /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -188,7 +188,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)..\include" "$(VCPKGDIR)\installed\include" /E /H /C /I /Y</Command>
+      <Command>xcopy "$(SolutionDir)..\include" "$(VCPKG_ROOT)\installed\include" /E /H /C /I /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -216,7 +216,7 @@
       </AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)..\include" "$(VCPKGDIR)\installed\include" /E /H /C /I /Y</Command>
+      <Command>xcopy "$(SolutionDir)..\include" "$(VCPKG_ROOT)\installed\include" /E /H /C /I /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
