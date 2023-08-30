@@ -145,6 +145,9 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)..\include" "$(VCPKGDIR)\installed\include" /E /H /C /I /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -161,6 +164,9 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)..\include" "$(VCPKGDIR)\installed\include" /E /H /C /I /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -181,6 +187,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)..\include" "$(VCPKGDIR)\installed\include" /E /H /C /I /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -206,6 +215,9 @@
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
     </Lib>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)..\include" "$(VCPKGDIR)\installed\include" /E /H /C /I /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
