@@ -15,7 +15,7 @@
 #include <vector>
 #include "wx/wx.h"
 #include "wx/socket.h"
-// this example is currently written to use only IP or only IPv6 sockets, it
+// this example is currently written to use only IP or only IPv4 sockets, it
 // should be extended to allow using either in the future
 //#if wxUSE_IPV6
 //typedef wxIPV6address IPaddress;

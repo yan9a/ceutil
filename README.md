@@ -6,8 +6,8 @@ You can get the ceutil source from its repository using the following command.
 
     git clone --depth 1 https://github.com/yan9a/ceutil.git
 
-By default, and the IP address type will be wxIPV6address.
-If you want to use wxIPV6address for ceUDP, you can use IPAddress definition at line 21 of ceUDP.h file.
+By default, and the IP address type for ceUDP will be wxIPV4address.
+If you want to use wxIPV6address for it, you can modify IPAddress definition in ceUDP.h file.
 
 ## Linux Setup
 
@@ -88,13 +88,12 @@ After cloning the vcpkg repository, add an environmental variable called 'VCPKG_
 
 Open visual studio solution in the ceutil sub-directory and build for x64 release and debug configurations.
 You might need to add the preprocessor definition WXUSINGDLL if the project did not previously reference wxWidgets.
-Compiled library will be installed in $(VCPKG_ROOT)\installed\$(Platform) under respective configuration. It will also install the include files under "$(VCPKG_ROOT)\installed\include".
+Compiled library will be installed under $(VCPKG_ROOT)\installed\x64-windows\lib under respective configuration. It will also install the include files under "$(VCPKG_ROOT)\installed\x64-windows\include".
 
 
 #### Developer Command Prompt
 
-You can also compile the library by opening "Developer Command Prompt for VS" and running ceutilw.bat. That will install the libraries under $(VCPKG_ROOT)\installed under respective platform and configuration.
-It will also install the include files under "$(VCPKG_ROOT)\installed\$(Platform)\include".
+You can also compile the library by opening "Developer Command Prompt for VS" and running ceutilw.bat. Compiled library will be installed under $(VCPKG_ROOT)\installed\x64-windows\lib under respective configuration. It will also install the include files under "$(VCPKG_ROOT)\installed\x64-windows\include".
 
 ### Open an Example Project
 
