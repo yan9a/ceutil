@@ -88,12 +88,22 @@ After cloning the vcpkg repository, add an environmental variable called 'VCPKG_
 
 Open visual studio solution in the ceutil sub-directory and build for x64 release and debug configurations.
 You might need to add the preprocessor definition WXUSINGDLL if the project did not previously reference wxWidgets.
-Compiled library will be installed under $(VCPKG_ROOT)\installed\x64-windows\lib under respective configuration. It will also install the include files under "$(VCPKG_ROOT)\installed\x64-windows\include".
+
 
 
 #### Developer Command Prompt
 
-You can also compile the library by opening "Developer Command Prompt for VS" and running ceutilw.bat. Compiled library will be installed under $(VCPKG_ROOT)\installed\x64-windows\lib under respective configuration. It will also install the include files under "$(VCPKG_ROOT)\installed\x64-windows\include".
+You can also compile the library by opening "Developer Command Prompt for VS" and running ceutilw.bat. 
+
+#### Installed Location
+
+Compiled library will be installed under 
+
+    "$(VCPKG_ROOT)\installed\x64-windows\lib"
+
+under respective configuration. It will also install the include files under 
+
+    "$(VCPKG_ROOT)\installed\x64-windows\include".
 
 ### Open an Example Project
 
