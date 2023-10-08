@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <string>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <vector>
 #include "ce/ceDateTime.h"
