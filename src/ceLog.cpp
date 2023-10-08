@@ -107,7 +107,8 @@ int ceLog::Write(string mes)
 int ceLog::Print(string mes)
 {
     if(this->m_enPrintf){
-        printf("%s\n",mes.c_str());
+        // printf("%s\n",mes.c_str());
+    	cout << mes << endl;
     }
     return Write(mes);
 }
