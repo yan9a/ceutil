@@ -3,7 +3,7 @@ if exist buildw (
 echo deleting
 rmdir /s /q buildw
 )
-cmake -G "Visual Studio 17 2022" -B ./buildw -S ./ -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%/scripts/buildsystems/vcpkg.cmake" -DCMAKE_INSTALL_PREFIX="%VCPKG_ROOT%/installed/x64-windows/" -DCMAKE_DEBUG_POSTFIX=d
+cmake -G "Visual Studio 17 2022" -A x64 -B ./buildw -S ./ -DCMAKE_TOOLCHAIN_FILE="%VCPKG_ROOT%/scripts/buildsystems/vcpkg.cmake" -DCMAKE_INSTALL_PREFIX="%VCPKG_ROOT%/installed/x64-windows/" -DCMAKE_DEBUG_POSTFIX=d
 cd buildw
 cmake --build . --config Release
 cmake --install . --config Release

@@ -93,7 +93,15 @@ You might need to add the preprocessor definition WXUSINGDLL if the project did 
 
 #### Developer Command Prompt
 
-You can also compile the library by opening "Developer Command Prompt for VS" and running ceutilw.bat. 
+You can also compile the library by opening "Developer Command Prompt for VS" and running ceutilw.bat. Generator for cmake is set as
+
+    -G "Visual Studio 17 2022"
+
+currently. Check with 
+
+    cmake -h 
+
+for other options.
 
 #### Installed Location
 
