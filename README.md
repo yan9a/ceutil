@@ -13,6 +13,7 @@ If you want to use wxIPV6address for it, you can modify IPAddress definition in 
 
 After cloning the repository, you can use the following command to install the library.
 
+    cd ceutil
     ./ceutil.sh install
 
 If you encounter problems such as "bad interpreter" in running the script, especially when you copied the files from a Windows system, you can try to fix line end and change its mode to be executable as follows.
@@ -20,16 +21,17 @@ If you encounter problems such as "bad interpreter" in running the script, espec
     sed -i -e 's/\r$//' ceutil.sh
     chmod +x ceutil.sh
 
+Install script prompts the user to add to netdev and dialout groups and also to install required libraries.
+
 ### Setup Visual Studio Code
 
 There are a few examples in the examples directory to demonstrate about using ceutil library.
 
-Install required tools as follows.
+Install visual studio code as follows.
 
-    sudo apt update
-    sudo apt-get install build-essential gdb cmake cmake-extras
     sudo snap install code
 
+If you are using WSL, visual code is already there and you don't need the above command.
 Go to a directory inside examples in the cloned repository and enter
 
     code .
@@ -62,6 +64,14 @@ For example, the following components can be selected.
  * MSVC vXXX - VS 20XX C++ x64/x86 build tool...
  * C++ CMake tools for Windows
 
+### Setup cmake
+
+Get the latest cmake at 
+
+ https://cmake.org/download/
+
+and adding path for it when installing.
+
 ### Setup vcpkg
 
 We can use vcpkg to install required libraries for ceutil. Install vcpkg and setup required libraries as follows.
@@ -76,11 +86,11 @@ We can use vcpkg to install required libraries for ceutil. Install vcpkg and set
     .\vcpkg install wxwidgets:x64-windows
     .\vcpkg install openssl:x64-windows
 
-After cloning the vcpkg repository, add an environmental variable called 'VCPKG_ROOT' for the cloned directory path. For example, if you cloned the repository at "C:\Users\aye\vcpkg" and find the bootstrap-vcpkg.bat file in that folder. You can define VCPKG_ROOT as system variables in "Environment Variables"
+After cloning the vcpkg repository, add an environmental variable called 'VCPKG_ROOT' for the cloned directory path. For example, if you cloned the repository at "C:\Users\username\vcpkg" and find the bootstrap-vcpkg.bat file in that folder. You can define VCPKG_ROOT as system variables in "Environment Variables"
 
     System variables
       Variable          Value
-      VCPKG_ROOT             C:\Users\aye\vcpkg   
+      VCPKG_ROOT             C:\Users\username\vcpkg   
 
 ### Setup ceutil 
 
@@ -91,13 +101,13 @@ You might need to add the preprocessor definition WXUSINGDLL if the project did 
 
 
 
-#### Developer Command Prompt
+#### Command Prompt
 
-You can also compile the library by opening "Developer Command Prompt for VS" and running ceutilw.bat. Generator for cmake is set as
+You can also compile the library by opening "Command Prompt" and running ceutilw.bat. Currently, generator for cmake is set as
 
     -G "Visual Studio 17 2022"
 
-currently. Check with 
+Check with 
 
     cmake -h 
 
