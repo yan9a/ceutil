@@ -1,5 +1,5 @@
-// File: tcpsvr.cpp
-// Description: A simple wxWidgets TCP server sample 
+// File: tcpclient.cpp
+// Description: A simple wxWidgets TCP client sample 
 // Author: Yan Naing Aye
 // Web: http://cool-emerald.blogspot.com
 // MIT License (https://opensource.org/licenses/MIT)
@@ -12,14 +12,16 @@
 //    Pearson Education, Inc. 2006. ISBN: 0-13-147381-6.
 
 #include "ce/ceUtil.h"
-// #include "myicon.xpm"
 using namespace ce;
 // IDs for the controls and the menu commands
 enum
 {
-	ID_TXTRX=101,
+	ID_BTNSEND = 101,
+	ID_TXTSEND,
+	ID_TXTRX,
 	SOCKET_ID,
-	SERVER_ID,
+	CLIENT_OPEN = wxID_OPEN,
+	CLIENT_CLOSE = wxID_CLOSE,
 	// menu items
 	Minimal_Quit = wxID_EXIT,
 	Minimal_About = wxID_ABOUT
@@ -28,10 +30,9 @@ enum
 class MyFrame;
 class MyApp : public wxApp
 {
-	ceTcpServer* _tcpsvr;
 	MyFrame *frame;
 public:
-	void OnTcpServerEvent(wxThreadEvent& event);
+	ceTcpClient* _tcpclient;
 	void OnTcpSocketEvent(wxThreadEvent& event);
 	virtual bool OnInit();
 };
@@ -41,22 +42,33 @@ class MyFrame : public wxFrame
 {
 public:
 	// ctor(s)
-	MyFrame(const wxString& title);
+	MyFrame(MyApp* app, const wxString& title);
 	~MyFrame();
 	// event handlers (these functions should _not_ be virtual)
 	void OnQuit(wxCommandEvent& event);
 	void OnAbout(wxCommandEvent& event);
 	void Print(std::string str);
+	void OnOpenConnection(wxCommandEvent& event);
+	void OnCloseConnection(wxCommandEvent& event);
+	void OnSend(wxCommandEvent& event);
+	void UpdateStatusBar();
 private:
+	MyApp* _app;
+	wxButton* btnSend;
+	wxTextCtrl* txtSend;
 	wxTextCtrl *txtRx;
+	wxMenu* fileMenu;
+	wxMenu* helpMenu;
 	// any class wishing to process wxWidgets events must use this macro
 	wxDECLARE_EVENT_TABLE();
 };
 
 // event tables and other macros for wxWidgets
 wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
-	EVT_MENU(Minimal_Quit,  MyFrame::OnQuit)
+	EVT_MENU(Minimal_Quit, MyFrame::OnQuit)
 	EVT_MENU(Minimal_About, MyFrame::OnAbout)
+	EVT_MENU(CLIENT_OPEN, MyFrame::OnOpenConnection)
+	EVT_MENU(CLIENT_CLOSE, MyFrame::OnCloseConnection)
 wxEND_EVENT_TABLE()
 
 IMPLEMENT_APP(MyApp)
@@ -68,24 +80,13 @@ bool MyApp::OnInit()
 	return false;
 
 	// depending on your system, some ports such as 3000, 8000, 8080 should be used with cautions
-	this->_tcpsvr = new ceTcpServer(this,SERVER_ID,SOCKET_ID,7225);
-	this->_tcpsvr->Open();
-	Connect(SERVER_ID, wxEVT_THREAD, wxThreadEventHandler(MyApp::OnTcpServerEvent));
+	this->_tcpclient = new ceTcpClient(this,SOCKET_ID);	
+	this->_tcpclient->SetRemote("localhost",7225);
 	Connect(SOCKET_ID, wxEVT_THREAD, wxThreadEventHandler(MyApp::OnTcpSocketEvent));
-	frame = new MyFrame("TCP Server using ceUtil lib");
+	frame = new MyFrame(this,"TCP Client using ceUtil lib");
 	frame->Show(true);
-	this->frame->Print("TCP Server listening");
+	this->frame->Print("Click Open Session menu to start a connection");
 	return true;
-}
-
-void MyApp::OnTcpServerEvent(wxThreadEvent& event)
-{
-	std::vector<char> v = event.GetPayload<std::vector<char>>();
-	std::string s = event.GetString().ToStdString();
-	int i = event.GetInt();
-	std::string str = "Server event: ip ="+s+", port = "+ std::to_string(i)+ (v[0]?", connected, clients: ":", disconnected, clients: ") + std::to_string(v[1]);
-	printf("%s\n",str.c_str());
-	this->frame->Print(str);
 }
 
 void MyApp::OnTcpSocketEvent(wxThreadEvent& event)
@@ -96,21 +97,13 @@ void MyApp::OnTcpSocketEvent(wxThreadEvent& event)
 	std::string str = "Socket event: Rx vec = "+ceMisc::cvec2hex(v)+", ip ="+s+", port = "+ std::to_string(i);
 	printf("%s\n",str.c_str());
 	this->frame->Print(str);
-
-	// write back
-	std::vector<char> tb{'O','K'};
-	this->_tcpsvr->Tx(tb);
-	this->frame->Print("Tx: "+ ce::ceMisc::cvec2hex(tb));
 }
 
 // frame constructor
-MyFrame::MyFrame(const wxString& title)
+MyFrame::MyFrame(MyApp* app, const wxString& title)
 : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(390, 280), 
-  wxDEFAULT_FRAME_STYLE ^ wxRESIZE_BORDER)
+  wxDEFAULT_FRAME_STYLE ^ wxRESIZE_BORDER),_app(app)
 {
-// // set the frame icon
-// SetIcon(wxICON(sample));
-
 #if wxUSE_MENUS
 // create a menu bar
 wxMenu *fileMenu = new wxMenu;
@@ -119,6 +112,8 @@ wxMenu *fileMenu = new wxMenu;
 wxMenu *helpMenu = new wxMenu;
 helpMenu->Append(Minimal_About, "&About\tF1", "Show about dialog");
 
+fileMenu->Append(CLIENT_OPEN, "&Open session\tAlt-O", "Connect to server");
+fileMenu->Append(CLIENT_CLOSE, "&Close session\tAlt-C", "Close connection");
 fileMenu->Append(Minimal_Quit, "E&xit\tAlt-X", "Quit this program");
 
 // now append the freshly created menu to the menu bar...
@@ -133,18 +128,22 @@ SetMenuBar(menuBar);
 #if wxUSE_STATUSBAR
 // create a status bar just for fun (by default with 1 pane only)
 CreateStatusBar(2);
-SetStatusText("TCP server using ceUtil lib");
+SetStatusText("TCP client using ceUtil lib");
 #endif // wxUSE_STATUSBAR
-txtRx = new wxTextCtrl(this, ID_TXTRX, wxT(""), wxPoint(5, 5), 
-        wxSize(365, 125), wxTE_MULTILINE);
+btnSend = new wxButton(this, ID_BTNSEND, wxT("Send"),
+	wxPoint(5, 5), wxSize(100, 25));
+txtSend = new wxTextCtrl(this, ID_TXTSEND, wxT("Hello!"),
+	wxPoint(120, 5), wxSize(250, 25));
+txtRx = new wxTextCtrl(this, ID_TXTRX, wxT(""),
+	wxPoint(5, 35), wxSize(365, 125), wxTE_MULTILINE);
 
-
+Connect(ID_BTNSEND, wxEVT_COMMAND_BUTTON_CLICKED,
+	wxCommandEventHandler(MyFrame::OnSend));
 }
 
 MyFrame::~MyFrame()
 {
 	// No delayed deletion here, as the frame is dying anyway
-	//delete _tcpsvr;
 }
 
 // event handlers
@@ -158,12 +157,12 @@ void MyFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 {
 wxMessageBox(wxString::Format
 (
-"ceUtil TCP server sample\n"
+"ceUtil TCP client sample\n"
 "\n"
 "Author: Yan Naing Aye \n"
 "Web: http://cool-emerald.blogspot.com"
 ),
-"About ceUtil TCP server sample",
+"About ceUtil TCP client sample",
 wxOK | wxICON_INFORMATION,
 this);
 }
@@ -173,5 +172,42 @@ void MyFrame::Print(std::string str)
 	txtRx->AppendText(wxString::Format(wxT("%s\n"),str));
 }
 
+void MyFrame::UpdateStatusBar()
+{
+	//fileMenu->Enable(CLIENT_OPEN, !_app->_tcpclient->IsConnected());
+	//fileMenu->Enable(CLIENT_CLOSE, _app->_tcpclient->IsConnected());
+	//if (_app->_tcpclient->IsConnected()) {
+	//	//SetStatusText(wxString::Format(wxT("%s:%u"), 
+	//	//    addr.IPAddress(), addr.Service()), 1);
+	//	SetStatusText(wxString::Format(wxT("Connected")), 1);
+	//}
+	//else {
+	//	SetStatusText(wxString::Format(wxT("Not connected")), 1);
+	//}
+}
 
+void MyFrame::OnOpenConnection(wxCommandEvent& WXUNUSED(event))
+{
+	_app->_tcpclient->Open();
+	// fileMenu->Enable(CLIENT_OPEN, false);
+    // fileMenu->Enable(CLIENT_CLOSE, false);
+	//update status
+	this->UpdateStatusBar();
+}
 
+void MyFrame::OnCloseConnection(wxCommandEvent& WXUNUSED(event))
+{
+	_app->_tcpclient->Close();
+
+	//update status
+	this->UpdateStatusBar();
+}
+
+void MyFrame::OnSend(wxCommandEvent& WXUNUSED(event))
+{
+	wxString str = txtSend->GetValue();
+	wxCharBuffer buffer = str.ToUTF8();
+	size_t txn = buffer.length();//for non-ASCII chars, having more than one byte per char
+	std::vector<char> vc{buffer.data(), buffer.data()+txn};
+	_app->_tcpclient->Tx(vc);
+}

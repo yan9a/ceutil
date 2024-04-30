@@ -251,8 +251,14 @@ int ceTcpServer::Tx(std::vector<char> bv)
         if(this->_socketBase->IsOk() && this->_socketBase->IsConnected()) {
                 // Write to pointed client
                 txn = bv.size();
-                _socketBase->Write(bv.data(), txn);
-                PrintLog("Tx: " + ceMisc::cvec2hex(bv));
+                size_t n = _socketBase->Write(bv.data(), txn).LastCount();
+                if (n != txn) {
+                    perror("ceTcpClient write error");
+                    txn = n;
+                }
+                else {
+                    PrintLog("Tx: " + ceMisc::cvec2hex(bv));
+                }
         }
     }
     return int(txn);

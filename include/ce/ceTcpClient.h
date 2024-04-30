@@ -1,12 +1,12 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:         ceTcpServer.h
-// Description:  TCP server module
+// Name:         ceTcpClient.h
+// Description:  TCP client module
 // Author:       Yan Naing Aye
 // Ref: http://cool-emerald.blogspot.com/2018/01/udptcp-socket-programming-with-wxwidgets.html
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef CETCPSVR_H
-#define CETCPSVR_H
+#ifndef CETCPCLIENT_H
+#define CETCPCLIENT_H
 #include "ce/ceMacros.h" // macros
 #if CE_WX==1
 #include <stdio.h>
@@ -22,34 +22,34 @@
 //#else
 typedef wxIPV4address IPaddress;
 //#endif
-#define CE_TCPSVR_RX_BUF_SIZE 32768
+#define CE_TCPCLIENT_RX_BUF_SIZE 32768
 
 namespace ce {
-class ceTcpServer : public wxEvtHandler {
+class ceTcpClient : public wxEvtHandler {
 public:
-	ceTcpServer(wxAppConsole* app, int serverid, int socketid, int port); // port = listening port number
-    ~ceTcpServer();
+	ceTcpClient(wxAppConsole* app, int socketid); // port = listening port number
+    ~ceTcpClient();
 	
-	bool Open(); // return true = success, false = error
-	bool Close();
+	void Open(); 
+	void Close();
 
     // Transmit (write) 
     int Tx(std::vector<char> bv); // return 0 = success, 1 = error
     // Receive (read) will raise receive event
+
+	void SetRemote(std::string remotehost, int port);
+	bool IsConnected();
+	bool IsOK();
 private:
-	void OnServerEvent(wxSocketEvent& event);
     void OnSocketEvent(wxSocketEvent& event);
 	wxAppConsole* _app;
 	int _socket_id;
-    int _server_id;
-	int _port;
-	bool _listening{false};
-    wxSocketServer* _socketServer{};
-    wxSocketBase* _socketBase{};
+	int _port{ 0 };
+	std::string _remotehost{""};
+    wxSocketClient* _socketClient{};
 	void PrintLog(std::string str);
-	int _connected_n{0};
 };
 
 } // namespace ce 
 #endif // CE_WX
-#endif // CETCPSVR_H
+#endif // CETCPCLIENT_H

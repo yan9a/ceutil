@@ -31,6 +31,7 @@
 
 // tcp
 #include "ce/ceTcpServer.h"
+#include "ce/ceTcpClient.h"
 
 // utilities
 #include "ce/ceMisc.h"
