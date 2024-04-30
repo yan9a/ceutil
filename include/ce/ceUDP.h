@@ -23,6 +23,8 @@
 typedef wxIPV4address IPaddress;
 //#endif
 
+#define CE_UDP_RX_BUF_SIZE 32768
+
 namespace ce {
 class ceUDP : public wxEvtHandler {
 public:

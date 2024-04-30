@@ -78,6 +78,9 @@
     <ClInclude Include="..\include\ce\ceRSA_OS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\ce\ceTcpServer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\ceConfig.cpp">
@@ -135,6 +138,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\ceRSA_OS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ceTcpServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

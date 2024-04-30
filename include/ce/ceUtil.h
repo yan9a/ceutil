@@ -29,6 +29,9 @@
 // http://cool-emerald.blogspot.com/2018/01/udptcp-socket-programming-with-wxwidgets.html
 #include "ce/ceUDP.h"
 
+// tcp
+#include "ce/ceTcpServer.h"
+
 // utilities
 #include "ce/ceMisc.h"
 

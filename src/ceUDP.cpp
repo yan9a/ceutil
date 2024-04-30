@@ -142,7 +142,7 @@ void ceUDP::OnSocketEvent(wxSocketEvent& event)
 {
 	IPaddress addr;
 	addr.Service(udp_port_rx);
-	char buf[32768];
+	char buf[CE_UDP_RX_BUF_SIZE];
 	size_t n;
 	int socketid = event.GetId();
 	std::string tmp; // = ("UDP RX: id = " + to_string(socketid));
