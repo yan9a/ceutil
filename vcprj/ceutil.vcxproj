@@ -36,7 +36,7 @@
     <ClInclude Include="..\include\ce\ceSerial.h" />
     <ClInclude Include="..\include\ce\ceSHA1.h" />
     <ClInclude Include="..\include\ce\ceTcpClient.h" />
-    <ClInclude Include="..\include\ce\ceTcpServer.h" />
+    <ClInclude Include="..\include\ce\cetcpsvr.h" />
     <ClInclude Include="..\include\ce\ceUDP.h" />
     <ClInclude Include="..\include\ce\ceutil.h" />
     <ClInclude Include="..\include\ce\cewxcvMisc.h" />
@@ -60,7 +60,6 @@
     <ClCompile Include="..\src\ceSerial.cpp" />
     <ClCompile Include="..\src\ceSHA1.cpp" />
     <ClCompile Include="..\src\ceTcpClient.cpp" />
-    <ClCompile Include="..\src\ceTcpServer.cpp" />
     <ClCompile Include="..\src\ceUDP.cpp" />
     <ClCompile Include="..\src\cewxcvMisc.cpp" />
     <ClCompile Include="..\src\ceWxSerial.cpp" />

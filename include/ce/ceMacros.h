@@ -10,6 +10,7 @@
 #define CE_JSON 1 // include JSON
 #define CE_WX 1 // include WX
 #define CE_CV 1 // include CV
+#define CE_DBG_PRINT 0 // print dbg mes
 
 #if defined(_WIN64) || defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__WINDOWS__) || defined(__TOS_WIN__) || defined(__CYGWIN__)
 	#ifndef CE_WINDOWS

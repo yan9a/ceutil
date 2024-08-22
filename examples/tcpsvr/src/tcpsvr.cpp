@@ -11,15 +11,20 @@
 // [2] Julian Smart and Kevin Hock, "Cross-Platform GUI Programming with wxWidgets,"
 //    Pearson Education, Inc. 2006. ISBN: 0-13-147381-6.
 
-#include "ce/ceUtil.h"
+#include "ce/cetcpsvr.h"
+#include "ce/ceMisc.h"
+
 // #include "myicon.xpm"
 using namespace ce;
+
+#define MAX_SOCKET_N 2
 // IDs for the controls and the menu commands
 enum
 {
 	ID_TXTRX=101,
-	SOCKET_ID,
-	SERVER_ID,
+	SERVER_ID=102,
+	SOCKET_ID=200,	
+	SOCKET_ID1=201,
 	// menu items
 	Minimal_Quit = wxID_EXIT,
 	Minimal_About = wxID_ABOUT
@@ -68,13 +73,16 @@ bool MyApp::OnInit()
 	return false;
 
 	// depending on your system, some ports such as 3000, 8000, 8080 should be used with cautions
-	this->_tcpsvr = new ceTcpServer(this,SERVER_ID,SOCKET_ID,7225);
+	int port = 7225;
+	this->_tcpsvr = new ceTcpServer(this,SERVER_ID,SOCKET_ID,port,2);
 	this->_tcpsvr->Open();
 	Connect(SERVER_ID, wxEVT_THREAD, wxThreadEventHandler(MyApp::OnTcpServerEvent));
-	Connect(SOCKET_ID, wxEVT_THREAD, wxThreadEventHandler(MyApp::OnTcpSocketEvent));
+	for(int i=0; i<MAX_SOCKET_N;i++){
+		Connect(SOCKET_ID+i, wxEVT_THREAD, wxThreadEventHandler(MyApp::OnTcpSocketEvent));
+	}
 	frame = new MyFrame("TCP Server using ceUtil lib");
 	frame->Show(true);
-	this->frame->Print("TCP Server listening");
+	this->frame->Print("TCP Server listening:"+std::to_string(port));
 	return true;
 }
 
@@ -83,7 +91,7 @@ void MyApp::OnTcpServerEvent(wxThreadEvent& event)
 	std::vector<char> v = event.GetPayload<std::vector<char>>();
 	std::string s = event.GetString().ToStdString();
 	int i = event.GetInt();
-	std::string str = "Server event: ip ="+s+", port = "+ std::to_string(i)+ (v[0]?", connected, clients: ":", disconnected, clients: ") + std::to_string(v[1]);
+	std::string str = "Server event: ip ="+s+", port = "+ std::to_string(i)+ (v[0]?", connected, clients: ":", disconnected, clients: ") + std::to_string(v[1])+ ", id: " + std::to_string(SOCKET_ID+int(v[2]));
 	printf("%s\n",str.c_str());
 	this->frame->Print(str);
 }
@@ -93,13 +101,13 @@ void MyApp::OnTcpSocketEvent(wxThreadEvent& event)
 	std::vector<char> v = event.GetPayload<std::vector<char>>();
 	std::string s = event.GetString().ToStdString();
 	int i = event.GetInt();
-	std::string str = "Socket event: Rx vec = "+ceMisc::cvec2hex(v)+", ip ="+s+", port = "+ std::to_string(i);
+	std::string str = "Socket event: Rx vec = "+ceMisc::cvec2hex(v)+", ip ="+s+", port = "+ std::to_string(i)+ ", id: " + std::to_string(event.GetId());
 	printf("%s\n",str.c_str());
 	this->frame->Print(str);
 
 	// write back
 	std::vector<char> tb{'O','K'};
-	this->_tcpsvr->Tx(tb);
+	this->_tcpsvr->Tx(event.GetId(),tb);
 	this->frame->Print("Tx: "+ ce::ceMisc::cvec2hex(tb));
 }
 

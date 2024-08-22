@@ -65,7 +65,6 @@ ${PROJECT_SOURCE_DIR}/src/ceLog.cpp
 ${PROJECT_SOURCE_DIR}/src/ceSerial.cpp
 ${PROJECT_SOURCE_DIR}/src/ceWxTmr.cpp
 ${PROJECT_SOURCE_DIR}/src/ceUDP.cpp
-${PROJECT_SOURCE_DIR}/src/ceTcpServer.cpp
 ${PROJECT_SOURCE_DIR}/src/ceTcpClient.cpp
 ${PROJECT_SOURCE_DIR}/src/ceMisc.cpp
 ${PROJECT_SOURCE_DIR}/src/ceFrame.cpp
