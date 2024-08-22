@@ -27,7 +27,7 @@ typedef wxIPV4address IPaddress;
 namespace ce {
 class ceTcpClient : public wxEvtHandler {
 public:
-	ceTcpClient(wxAppConsole* app, int socketid); // port = listening port number
+	ceTcpClient(wxEvtHandler* app, int socketid); // port = listening port number
     ~ceTcpClient();
 	
 	void Open(); 
@@ -40,9 +40,13 @@ public:
 	void SetRemote(std::string remotehost, int port);
 	bool IsConnected();
 	bool IsOK();
+	void SetRemotehost(std::string remotehost);
+	void SetPort(int port);
+	std::string GetRemotehost();
+	int GetPort();
 private:
     void OnSocketEvent(wxSocketEvent& event);
-	wxAppConsole* _app;
+	wxEvtHandler* _app;
 	int _socket_id;
 	int _port{ 0 };
 	std::string _remotehost{""};

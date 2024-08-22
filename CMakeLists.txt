@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.0.0)
-project (ceutil VERSION 1.1.0)
+project (ceutil VERSION 2.1.0)
 # version 1.1.0 Added DES, SHA, RSA
+# version 2.1.0 Replace wxAppConsole with wxEvtHandler, add TCP server
+
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

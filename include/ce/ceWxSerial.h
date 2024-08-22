@@ -15,14 +15,14 @@ namespace ce {
 
 class ceWxSerial : public wxEvtHandler, public ce::ceSerial {
 public:
-	ceWxSerial(wxAppConsole* app,int id, int interval, 
+	ceWxSerial(wxEvtHandler* app,int id, int interval, 
 		std::string Device, long BaudRate, long DataSize, char ParityType, float NStopBits);
 	~ceWxSerial();
 	void OnTimer(wxTimerEvent& event);
 	std::vector<char> Chk();
 private:
 	wxTimer* _timer;
-	wxAppConsole* _app;
+	wxEvtHandler* _app;
 	int _id;
 	int _interval;
 };

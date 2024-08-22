@@ -27,7 +27,7 @@ typedef wxIPV4address IPaddress;
 namespace ce {
 class ceTcpServer : public wxEvtHandler {
 public:
-	ceTcpServer(wxAppConsole* app, int serverid, int socketid, int port); // port = listening port number
+	ceTcpServer(wxEvtHandler* app, int serverid, int socketid, int port); // port = listening port number
     ~ceTcpServer();
 	
 	bool Open(); // return true = success, false = error
@@ -39,7 +39,7 @@ public:
 private:
 	void OnServerEvent(wxSocketEvent& event);
     void OnSocketEvent(wxSocketEvent& event);
-	wxAppConsole* _app;
+	wxEvtHandler* _app;
 	int _socket_id;
     int _server_id;
 	int _port;

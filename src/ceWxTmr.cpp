@@ -10,7 +10,7 @@
 using namespace std;
 namespace ce {
 //ctor
-ceWxTmr::ceWxTmr(wxAppConsole* app,int id, int interval) : _app(app), _id(id), _interval(interval)
+ceWxTmr::ceWxTmr(wxEvtHandler* app,int id, int interval) : _app(app), _id(id), _interval(interval)
 {
 	this->_timer = new wxTimer(this, _id);
 	Connect(_id, wxEVT_TIMER, wxTimerEventHandler(ceWxTmr::OnTimer));		

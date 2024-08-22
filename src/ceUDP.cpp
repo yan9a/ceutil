@@ -9,19 +9,19 @@
 #if CE_WX==1
 namespace ce {
 
-ceUDP::ceUDP(wxAppConsole* app, int socketid, int rx_port) :
+ceUDP::ceUDP(wxEvtHandler* app, int socketid, int rx_port) :
 _app(app),SOCKET_ID(socketid),udp_port_rx(rx_port),udp_port_tx(rx_port),udp_remote_host("localhost")
 {
 	_ok = false;
 }
 
-ceUDP::ceUDP(wxAppConsole* app, int socketid, int rx_port, int tx_port) :
+ceUDP::ceUDP(wxEvtHandler* app, int socketid, int rx_port, int tx_port) :
 _app(app),SOCKET_ID(socketid),udp_port_rx(rx_port),udp_port_tx(tx_port),udp_remote_host("localhost")
 {
 	_ok = false;
 }
 
-ceUDP::ceUDP(wxAppConsole* app, int socketid, int rx_port, int tx_port, std::string remotehost) :
+ceUDP::ceUDP(wxEvtHandler* app, int socketid, int rx_port, int tx_port, std::string remotehost) :
 _app(app),SOCKET_ID(socketid),udp_port_rx(rx_port),udp_port_tx(tx_port),udp_remote_host(remotehost)
 {
 	_ok = false;

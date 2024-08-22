@@ -66,6 +66,9 @@
     <ClCompile Include="..\src\ceWxSerial.cpp" />
     <ClCompile Include="..\src\ceWxTmr.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\CMakeLists.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{5397B256-872B-44E9-A100-8EE02B070E5A}</ProjectGuid>

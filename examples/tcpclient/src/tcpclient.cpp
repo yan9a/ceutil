@@ -13,7 +13,7 @@
 
 #include "ce/ceUtil.h"
 using namespace ce;
-// IDs for the controls and the menu commands
+// IDs for the controls and the menu commandscm
 enum
 {
 	ID_BTNSEND = 101,

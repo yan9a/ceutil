@@ -13,12 +13,12 @@ namespace ce {
 
 class ceWxTmr : public wxEvtHandler {
 public:
-	ceWxTmr(wxAppConsole* app,int id, int interval);
+	ceWxTmr(wxEvtHandler* app,int id, int interval);
 	void OnTimer(wxTimerEvent& event);
 	void Start();
 private:
 	wxTimer* _timer;
-	wxAppConsole* _app;
+	wxEvtHandler* _app;
 	int _id;
 	int _interval;
 };

@@ -16,7 +16,7 @@ void ceTcpServer::PrintLog(string str)
     // printf("%s \n",str.c_str());
 }
 
-ceTcpServer::ceTcpServer(wxAppConsole* app, int serverid, int socketid, int port):
+ceTcpServer::ceTcpServer(wxEvtHandler* app, int serverid, int socketid, int port):
 _app(app),_server_id(serverid),_socket_id(socketid),_port(port)
 {    
     Connect(serverid, wxEVT_SOCKET, wxSocketEventHandler(ceTcpServer::OnServerEvent));
@@ -90,7 +90,7 @@ void ceTcpServer::OnServerEvent(wxSocketEvent& event)
 	switch (event.GetSocketEvent())
 	{
 	case wxSOCKET_CONNECTION: 
-        PrintLog("OnServerEvent"); 
+        PrintLog("Connection event"); 
         break;
 	default: 
         perror("Unexpected event"); 

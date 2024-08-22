@@ -28,9 +28,9 @@ typedef wxIPV4address IPaddress;
 namespace ce {
 class ceUDP : public wxEvtHandler {
 public:
-	ceUDP(wxAppConsole* app, int socketid, int rx_port); // rx_port = 0 for not listening
-	ceUDP(wxAppConsole* app, int socketid, int rx_port, int tx_port);
-	ceUDP(wxAppConsole* app, int socketid, int rx_port, int tx_port, std::string remotehost);
+	ceUDP(wxEvtHandler* app, int socketid, int rx_port); // rx_port = 0 for not listening
+	ceUDP(wxEvtHandler* app, int socketid, int rx_port, int tx_port);
+	ceUDP(wxEvtHandler* app, int socketid, int rx_port, int tx_port, std::string remotehost);
 	int Tx(std::vector<char> bv); // return 0 = success, 1 = error
 	int Tx(std::vector<char> bv, std::string remoteHost, int txPort); // return 0 = success, 1 = error
 	int Open(); // return 0 = success, 1 = error
@@ -44,7 +44,7 @@ public:
 private:
 	void Rx(int socketid, std::vector<char> bv, std::string ip, int port);
 	void OnSocketEvent(wxSocketEvent& event);
-	wxAppConsole* _app;
+	wxEvtHandler* _app;
 	int SOCKET_ID;
 	int udp_port_rx;
 	int udp_port_tx;

@@ -16,7 +16,7 @@ void ceTcpClient::PrintLog(string str)
     // printf("%s \n",str.c_str());
 }
 
-ceTcpClient::ceTcpClient(wxAppConsole* app, int socketid):
+ceTcpClient::ceTcpClient(wxEvtHandler* app, int socketid):
 _app(app),_socket_id(socketid)
 {   
     // Create the socket
@@ -41,6 +41,26 @@ void ceTcpClient::SetRemote(string remotehost, int port)
 {
     _remotehost = remotehost;
     _port = port;
+}
+
+void ceTcpClient::SetRemotehost(std::string remotehost)
+{
+    _remotehost = remotehost;
+}
+
+void ceTcpClient::SetPort(int port)
+{
+    _port = port;
+}
+
+std::string ceTcpClient::GetRemotehost()
+{
+    return _remotehost;
+}
+
+int ceTcpClient::GetPort()
+{
+    return _port;
 }
 
 void ceTcpClient::Open()

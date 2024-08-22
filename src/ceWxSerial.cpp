@@ -11,7 +11,7 @@ using namespace std;
 namespace ce {
 
 //ctor
-ceWxSerial::ceWxSerial(wxAppConsole* app,int id, int interval, 
+ceWxSerial::ceWxSerial(wxEvtHandler* app,int id, int interval, 
 	std::string Device, long BaudRate, long DataSize, char ParityType, float NStopBits)
 	: _app(app), _id(id), _interval(interval), ceSerial(Device, BaudRate, DataSize, ParityType, NStopBits)
 {
