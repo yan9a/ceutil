@@ -59,8 +59,6 @@ endif()
 message(STATUS "List of libraries = ${LIBS}")
 include_directories(${PROJECT_SOURCE_DIR}/include)
 add_library(${PROJECT_NAME}
-${PROJECT_SOURCE_DIR}/src/ceDateTime.cpp
-${PROJECT_SOURCE_DIR}/src/ceMmDateTime.cpp
 ${PROJECT_SOURCE_DIR}/src/ceLog.cpp
 ${PROJECT_SOURCE_DIR}/src/ceSerial.cpp
 ${PROJECT_SOURCE_DIR}/src/ceWxTmr.cpp
@@ -72,7 +70,6 @@ ${PROJECT_SOURCE_DIR}/src/ceFraChecksum.cpp
 ${PROJECT_SOURCE_DIR}/src/ceFraCmd.cpp
 ${PROJECT_SOURCE_DIR}/src/ceI2C.cpp
 ${PROJECT_SOURCE_DIR}/src/cePCA9535.cpp
-${PROJECT_SOURCE_DIR}/src/ceConfig.cpp
 ${PROJECT_SOURCE_DIR}/src/ceModbus.cpp
 ${PROJECT_SOURCE_DIR}/src/ceWxSerial.cpp
 ${PROJECT_SOURCE_DIR}/src/cewxcvMisc.cpp

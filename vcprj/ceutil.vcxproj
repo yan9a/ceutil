@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\ce\ceConfig.h" />
-    <ClInclude Include="..\include\ce\ceDateTime.h" />
+    <ClInclude Include="..\include\ce\ceconf.h" />
     <ClInclude Include="..\include\ce\ceDES.h" />
+    <ClInclude Include="..\include\ce\cedt.h" />
     <ClInclude Include="..\include\ce\ceFraChecksum.h" />
     <ClInclude Include="..\include\ce\ceFraCmd.h" />
     <ClInclude Include="..\include\ce\ceFrame.h" />
@@ -29,7 +29,6 @@
     <ClInclude Include="..\include\ce\ceLog.h" />
     <ClInclude Include="..\include\ce\ceMacros.h" />
     <ClInclude Include="..\include\ce\ceMisc.h" />
-    <ClInclude Include="..\include\ce\ceMmDateTime.h" />
     <ClInclude Include="..\include\ce\ceModbus.h" />
     <ClInclude Include="..\include\ce\cePCA9535.h" />
     <ClInclude Include="..\include\ce\ceRSA_OS.h" />
@@ -38,13 +37,11 @@
     <ClInclude Include="..\include\ce\ceTcpClient.h" />
     <ClInclude Include="..\include\ce\cetcpsvr.h" />
     <ClInclude Include="..\include\ce\ceUDP.h" />
-    <ClInclude Include="..\include\ce\ceutil.h" />
     <ClInclude Include="..\include\ce\cewxcvMisc.h" />
     <ClInclude Include="..\include\ce\ceWxSerial.h" />
     <ClInclude Include="..\include\ce\ceWxTmr.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\ceConfig.cpp" />
     <ClCompile Include="..\src\ceDateTime.cpp" />
     <ClCompile Include="..\src\ceDES.cpp" />
     <ClCompile Include="..\src\ceFraChecksum.cpp" />
