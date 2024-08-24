@@ -31,10 +31,12 @@
     <ClInclude Include="..\include\ce\cemisc.h" />
     <ClInclude Include="..\include\ce\cemodbus.h" />
     <ClInclude Include="..\include\ce\cepca9535.h" />
-    <ClInclude Include="..\include\ce\ceTcpClient.h" />
+    <ClInclude Include="..\include\ce\cersaos.h" />
+    <ClInclude Include="..\include\ce\cesha1.h" />
+    <ClInclude Include="..\include\ce\cetcpcli.h" />
     <ClInclude Include="..\include\ce\cetcpsvr.h" />
-    <ClInclude Include="..\include\ce\ceUDP.h" />
-    <ClInclude Include="..\include\ce\cewxcvMisc.h" />
+    <ClInclude Include="..\include\ce\ceudp.h" />
+    <ClInclude Include="..\include\ce\cewxcvmisc.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\ceRSA_OS.cpp" />
