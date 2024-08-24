@@ -20,50 +20,33 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\ce\ceconf.h" />
-    <ClInclude Include="..\include\ce\ceDES.h" />
+    <ClInclude Include="..\include\ce\cedes.h" />
     <ClInclude Include="..\include\ce\cedt.h" />
-    <ClInclude Include="..\include\ce\ceFraChecksum.h" />
-    <ClInclude Include="..\include\ce\ceFraCmd.h" />
-    <ClInclude Include="..\include\ce\ceFrame.h" />
-    <ClInclude Include="..\include\ce\ceI2C.h" />
-    <ClInclude Include="..\include\ce\ceLog.h" />
+    <ClInclude Include="..\include\ce\cefracmd.h" />
+    <ClInclude Include="..\include\ce\cefracs.h" />
+    <ClInclude Include="..\include\ce\ceframe.h" />
+    <ClInclude Include="..\include\ce\cei2c.h" />
+    <ClInclude Include="..\include\ce\celog.h" />
     <ClInclude Include="..\include\ce\ceMacros.h" />
-    <ClInclude Include="..\include\ce\ceMisc.h" />
-    <ClInclude Include="..\include\ce\ceModbus.h" />
-    <ClInclude Include="..\include\ce\cePCA9535.h" />
-    <ClInclude Include="..\include\ce\ceRSA_OS.h" />
-    <ClInclude Include="..\include\ce\ceSerial.h" />
-    <ClInclude Include="..\include\ce\ceSHA1.h" />
+    <ClInclude Include="..\include\ce\cemisc.h" />
+    <ClInclude Include="..\include\ce\cemodbus.h" />
+    <ClInclude Include="..\include\ce\cepca9535.h" />
     <ClInclude Include="..\include\ce\ceTcpClient.h" />
     <ClInclude Include="..\include\ce\cetcpsvr.h" />
     <ClInclude Include="..\include\ce\ceUDP.h" />
     <ClInclude Include="..\include\ce\cewxcvMisc.h" />
-    <ClInclude Include="..\include\ce\ceWxSerial.h" />
-    <ClInclude Include="..\include\ce\ceWxTmr.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\ceDateTime.cpp" />
-    <ClCompile Include="..\src\ceDES.cpp" />
-    <ClCompile Include="..\src\ceFraChecksum.cpp" />
-    <ClCompile Include="..\src\ceFraCmd.cpp" />
-    <ClCompile Include="..\src\ceFrame.cpp" />
-    <ClCompile Include="..\src\ceI2C.cpp" />
-    <ClCompile Include="..\src\ceLog.cpp" />
-    <ClCompile Include="..\src\ceMisc.cpp" />
-    <ClCompile Include="..\src\ceMmDateTime.cpp" />
-    <ClCompile Include="..\src\ceModbus.cpp" />
-    <ClCompile Include="..\src\cePCA9535.cpp" />
     <ClCompile Include="..\src\ceRSA_OS.cpp" />
-    <ClCompile Include="..\src\ceSerial.cpp" />
     <ClCompile Include="..\src\ceSHA1.cpp" />
     <ClCompile Include="..\src\ceTcpClient.cpp" />
     <ClCompile Include="..\src\ceUDP.cpp" />
     <ClCompile Include="..\src\cewxcvMisc.cpp" />
-    <ClCompile Include="..\src\ceWxSerial.cpp" />
-    <ClCompile Include="..\src\ceWxTmr.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\CMakeCPack.txt" />
     <Text Include="..\CMakeLists.txt" />
+    <Text Include="..\CMakeM1.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
