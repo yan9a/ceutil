@@ -39,10 +39,6 @@
     <ClInclude Include="..\include\ce\cewxcvmisc.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\ceRSA_OS.cpp" />
-    <ClCompile Include="..\src\ceSHA1.cpp" />
-    <ClCompile Include="..\src\ceTcpClient.cpp" />
-    <ClCompile Include="..\src\ceUDP.cpp" />
     <ClCompile Include="..\src\cewxcvMisc.cpp" />
   </ItemGroup>
   <ItemGroup>
