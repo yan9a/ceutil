@@ -57,11 +57,22 @@ if(ADDCV)
 endif()
 message(STATUS "List of libraries = ${LIBS}")
 include_directories(${PROJECT_SOURCE_DIR}/include)
-add_library(${PROJECT_NAME}
+# add_library(${PROJECT_NAME}
 
-)
-target_link_libraries(${PROJECT_NAME} ${LIBS})
-install(TARGETS ${PROJECT_NAME} DESTINATION lib)
+# )
+# target_link_libraries(${PROJECT_NAME} ${LIBS})
+# install(TARGETS ${PROJECT_NAME} DESTINATION lib)
+
+add_subdirectory(examples/I2C)
+add_subdirectory(examples/kbhit)
+add_subdirectory(examples/Log)
+add_subdirectory(examples/Modbus)
+# add_subdirectory(examples/rsakeygen)
+add_subdirectory(examples/Serial)
+add_subdirectory(examples/tcpclient)
+add_subdirectory(examples/tcpsvr)
+add_subdirectory(examples/UDP)
+
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/ce
         DESTINATION include 
         FILES_MATCHING 
