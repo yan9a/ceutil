@@ -16,7 +16,7 @@ if [ $# == 1 ]; then
  opt_sh=$1
 else 
  echo "You can input argument:"
- echo " 'install' : to install prerequisite packages, generate cmake files, build and install the lib"
+ echo " 'install' : to install prerequisite packages, generate cmake files, build and install the header files"
  echo " 'cmake' : to generate cmake files, build, and install"
  echo " 'build': to build and run"
  echo " ..."
@@ -83,8 +83,8 @@ if [[ $opt_sh == "install" ]] || [[ $opt_sh == "cmake" ]] || [[ $opt_sh == "buil
     cd build && make && sudo make install
     if [[ $? == 0 ]]; then
         echo "Build successful"
-        ls -l *ceutil.so
-        ldd *ceutil.so
+        # ls -l *ceutil.so
+        # ldd *ceutil.so
         # ls -l *$ceutil.a
         # ar -t *$ceutil.a
     else
@@ -94,14 +94,13 @@ else
     echo "Invalid option for $PRJNAME ..."
 fi
 
-if [[ "$opt_sh" == "install" ]]; then
-    echo "Configuring lib path ..."
-    sudo sh -c "echo /usr/local/lib/ > /etc/ld.so.conf.d/ceutil.conf"
-    sudo ldconfig
-    echo " ."
-    echo " ."
-    echo " ."
-fi # config
+# if [[ "$opt_sh" == "install" ]]; then
+#     echo "Configuring lib path ..."
+#     sudo sh -c "echo /usr/local/lib/ > /etc/ld.so.conf.d/ceutil.conf"
+#     sudo ldconfig
+#     echo " ."
+#     echo " ."
+#     echo " ."
+# fi # config
 
     
-

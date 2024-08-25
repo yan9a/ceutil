@@ -11,3 +11,5 @@ cmake --build . --config Debug
 cmake --install . --config Debug
 
 cd ..
+
+@xcopy ".\include" "%VCPKG_ROOT%\installed\x64-windows\include" /E /H /C /I /Y

@@ -4,9 +4,9 @@
 // MIT License (https://opensource.org/licenses/MIT)
 // Copyright (c) 2021 Yan Naing Aye
 
-#include <stdio.h>
-#include "ce/ceSerial.h"
-#include "ce/ceModbus.h"
+#include <cstdio>
+#include "ce/ceserial.h"
+#include "ce/cemodbus.h"
 #include <vector>
 using namespace std;
 using namespace ce;

@@ -1,5 +1,9 @@
 #include <wx/wx.h>
-#include "ce/ceUtil.h"
+#include "ce/cersaos.h"
+#include "ce/celog.h"
+#include "ce/cemisc.h"
+#include <vector>
+
 #include <iostream>
 using namespace ce;
 using namespace std;

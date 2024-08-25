@@ -9,8 +9,8 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
-#include "ce/ceRSA_OS.h"
-#include "ce/ceMisc.h"
+#include "ce/cersaos.h"
+#include "ce/cemisc.h"
 using namespace std;
 using namespace ce;
 // ----------------------------------------------------------------------------

@@ -1,6 +1,5 @@
 #include <wx/wx.h>
-#include "ce/ceMacros.h"
-#include "ce/ceMisc.h"
+#include "ce/cemisc.h"
 #include <string>
 using namespace std;
 using namespace ce;

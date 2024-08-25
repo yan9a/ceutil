@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 3.0.0)
-project (ceutil VERSION 2.1.0)
-# version 1.1.0 Added DES, SHA, RSA
-# version 2.1.0 Replace wxAppConsole with wxEvtHandler, add TCP server
-
+project (ceutil VERSION 2.1.3)
+# version 1.0.0 Added DES, SHA, RSA
+# version 2.0.0 Replace wxAppConsole with wxEvtHandler, add TCP server, header only
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -58,31 +57,22 @@ if(ADDCV)
 endif()
 message(STATUS "List of libraries = ${LIBS}")
 include_directories(${PROJECT_SOURCE_DIR}/include)
-add_library(${PROJECT_NAME}
-${PROJECT_SOURCE_DIR}/src/ceDateTime.cpp
-${PROJECT_SOURCE_DIR}/src/ceMmDateTime.cpp
-${PROJECT_SOURCE_DIR}/src/ceLog.cpp
-${PROJECT_SOURCE_DIR}/src/ceSerial.cpp
-${PROJECT_SOURCE_DIR}/src/ceWxTmr.cpp
-${PROJECT_SOURCE_DIR}/src/ceUDP.cpp
-${PROJECT_SOURCE_DIR}/src/ceTcpServer.cpp
-${PROJECT_SOURCE_DIR}/src/ceTcpClient.cpp
-${PROJECT_SOURCE_DIR}/src/ceMisc.cpp
-${PROJECT_SOURCE_DIR}/src/ceFrame.cpp
-${PROJECT_SOURCE_DIR}/src/ceFraChecksum.cpp
-${PROJECT_SOURCE_DIR}/src/ceFraCmd.cpp
-${PROJECT_SOURCE_DIR}/src/ceI2C.cpp
-${PROJECT_SOURCE_DIR}/src/cePCA9535.cpp
-${PROJECT_SOURCE_DIR}/src/ceConfig.cpp
-${PROJECT_SOURCE_DIR}/src/ceModbus.cpp
-${PROJECT_SOURCE_DIR}/src/ceWxSerial.cpp
-${PROJECT_SOURCE_DIR}/src/cewxcvMisc.cpp
-${PROJECT_SOURCE_DIR}/src/ceDES.cpp
-${PROJECT_SOURCE_DIR}/src/ceSHA1.cpp
-${PROJECT_SOURCE_DIR}/src/ceRSA_OS.cpp
-)
-target_link_libraries(${PROJECT_NAME} ${LIBS})
-install(TARGETS ${PROJECT_NAME} DESTINATION lib)
+# add_library(${PROJECT_NAME}
+
+# )
+# target_link_libraries(${PROJECT_NAME} ${LIBS})
+# install(TARGETS ${PROJECT_NAME} DESTINATION lib)
+
+add_subdirectory(examples/I2C)
+add_subdirectory(examples/kbhit)
+add_subdirectory(examples/Log)
+add_subdirectory(examples/Modbus)
+# add_subdirectory(examples/rsakeygen)
+add_subdirectory(examples/Serial)
+add_subdirectory(examples/tcpclient)
+add_subdirectory(examples/tcpsvr)
+add_subdirectory(examples/UDP)
+
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/ce
         DESTINATION include 
         FILES_MATCHING 
