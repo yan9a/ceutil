@@ -27,7 +27,6 @@
     <ClInclude Include="..\include\ce\ceframe.h" />
     <ClInclude Include="..\include\ce\cei2c.h" />
     <ClInclude Include="..\include\ce\celog.h" />
-    <ClInclude Include="..\include\ce\ceMacros.h" />
     <ClInclude Include="..\include\ce\cemisc.h" />
     <ClInclude Include="..\include\ce\cemodbus.h" />
     <ClInclude Include="..\include\ce\cepca9535.h" />
