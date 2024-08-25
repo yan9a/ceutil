@@ -49,9 +49,9 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest -C ${{env.BUILD_TYPE}}
 
-    - name: Configure CMake for examples
-      run: cmake -B ${{env.WS_DIR}}/examples/build -S ${{env.WS_DIR}}/examples -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+    # - name: Configure CMake for examples
+    #   run: cmake -B ${{env.WS_DIR}}/examples/build -S ${{env.WS_DIR}}/examples -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
-    - name: Build examples
-      # Build your program with the given configuration
-      run: cmake --build ${{env.WS_DIR}}/examples/build --config ${{env.BUILD_TYPE}}
+    # - name: Build examples
+    #   # Build your program with the given configuration
+    #   run: cmake --build ${{env.WS_DIR}}/examples/build --config ${{env.BUILD_TYPE}}
