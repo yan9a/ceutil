@@ -11,10 +11,10 @@ If you want to use wxIPV6address for it, you can modify IPAddress definition in 
 
 ## Linux Setup
 
-After cloning the repository, you can use the following command to install the library.
+After cloning the repository, you can use the following command to install the library. It basically copies header files to /usr/local/include
 
     cd ceutil
-    ./ceutil.sh install
+    ./ceutil.sh 
 
 If you encounter problems such as "bad interpreter" in running the script, especially when you copied the files from a Windows system, you can try to fix line end and change its mode to be executable as follows.
 
@@ -115,18 +115,10 @@ for other options.
 
 #### Installed Location
 
-Compiled library will be installed under 
-
-    "$(VCPKG_ROOT)\installed\x64-windows\lib"
-
-under respective configuration. It will also install the include files under 
+The include files are installed under 
 
     "$(VCPKG_ROOT)\installed\x64-windows\include".
 
 ### Open an Example Project
 
 After setting up the requried libraries, you can now open an example solution in examples directory of the cloned repository.
-
-### Docker
-
-Docker image 'yan9a/cebian' has all the required libraries for ceutil setup. Its Dockerfile can also be found in the root folder.
