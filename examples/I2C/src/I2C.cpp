@@ -1,4 +1,5 @@
-#include "ce/ceUtil.h"
+#include "ce/cepca9535.h"
+#include "wx/wx.h"
 using namespace ce;
 
 int main(){

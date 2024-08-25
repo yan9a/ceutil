@@ -11,7 +11,8 @@
 // [2] Julian Smart and Kevin Hock, "Cross-Platform GUI Programming with wxWidgets,"
 //    Pearson Education, Inc. 2006. ISBN: 0-13-147381-6.
 
-#include "ce/ceUtil.h"
+#include "ce/cetcpcli.h"
+#include "ce/cemisc.h"
 using namespace ce;
 // IDs for the controls and the menu commandscm
 enum

@@ -5,9 +5,8 @@
 // Copyright (c) 2018 Yan Naing Aye
 
 #include <stdio.h>
-#include "ce/ceSerial.h"
+#include "ce/ceserial.h"
 using namespace std;
-using namespace ce;
 
 int main()
 {

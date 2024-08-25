@@ -50,7 +50,6 @@
 #include <vector>
 #include "wx/wx.h"
 #include "wx/socket.h"
-#include "ce/ceMisc.h" // utilities
 // this example is currently written to use only IP or only IPv4 sockets, it
 // should be extended to allow using either in the future
 //#if wxUSE_IPV6
@@ -246,7 +245,7 @@ inline int ceTcpClient::Tx(std::vector<char> bv)
             txn = n;
         }
         else {
-            PrintLog("Tx: " + ceMisc::cvec2hex(bv));
+            // PrintLog("Tx: " + ceMisc::cvec2hex(bv));
         }
     }
     return int(txn);

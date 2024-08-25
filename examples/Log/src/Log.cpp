@@ -1,5 +1,5 @@
 #include <wx/wx.h>
-#include "ce/ceUtil.h"
+#include "ce/celog.h"
 using namespace ce;
 int main(){
 	ceLog l("./",1);

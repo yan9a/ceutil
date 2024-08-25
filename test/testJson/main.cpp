@@ -9,7 +9,7 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
-#include "ce/ceConfig.h"
+#include "ce/ceconf.h"
 using namespace std;
 using namespace ce;
 int main() {

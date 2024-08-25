@@ -9,8 +9,8 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
-#include "ce/ceSHA1.h"
-#include "ce/ceMisc.h"
+#include "ce/cesha1.h"
+#include "ce/cemisc.h"
 using namespace std;
 using namespace ce;
 int main() {

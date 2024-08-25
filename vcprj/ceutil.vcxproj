@@ -39,9 +39,6 @@
     <ClInclude Include="..\include\ce\cewxcvmisc.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\cewxcvMisc.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="..\CMakeCPack.txt" />
     <Text Include="..\CMakeLists.txt" />
     <Text Include="..\CMakeM1.txt" />

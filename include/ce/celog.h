@@ -282,7 +282,7 @@ inline void ceLog::ReadDir(const std::string& name, std::vector<std::string>& v)
     }
 }
 #else
-inline void ceLog::ReadDir(const string& name, vector<string>& v)
+inline void ceLog::ReadDir(const std::string& name, std::vector<std::string>& v)
 {
     DIR* dirp = opendir(name.c_str());
     struct dirent* dp;

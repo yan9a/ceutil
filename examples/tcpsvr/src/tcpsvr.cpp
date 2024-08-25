@@ -12,7 +12,7 @@
 //    Pearson Education, Inc. 2006. ISBN: 0-13-147381-6.
 
 #include "ce/cetcpsvr.h"
-#include "ce/ceMisc.h"
+#include "ce/cemisc.h"
 
 // #include "myicon.xpm"
 using namespace ce;
