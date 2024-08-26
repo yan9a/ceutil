@@ -8,43 +8,43 @@
 // Reference : http://elinux.org/Interfacing_with_I2C_Devices
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef CE_MACROS_H
-#define CE_MACROS_H
+#ifndef CEI2C_H
+#define CEI2C_H
 
 #define CE_DBG_PRINT 0 // print dbg mes
 
+#ifndef CE_MACROS_H
+#define CE_MACROS_H
+
 #if defined(_WIN64) || defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__WINDOWS__) || defined(__TOS_WIN__) || defined(__CYGWIN__)
-	#ifndef CE_WINDOWS
-		#define CE_WINDOWS
-	#endif
+#ifndef CE_WINDOWS
+#define CE_WINDOWS
+#endif
 #elif defined(__linux__) || defined(unix) || defined(__unix) || defined(__unix__)
-	#ifndef CE_LINUX
-		#define CE_LINUX
-	#endif
+#ifndef CE_LINUX
+#define CE_LINUX
+#endif
 #else
-	#ifndef CE_NOS
-		#define CE_NOS
-	#endif
+#ifndef CE_NOS
+#define CE_NOS
+#endif
 #endif
 
 #if defined(__x86_64) || defined(__x86_64__) || defined(__amd64__) || defined(__amd64)
-	#ifndef CE_x86_64
-		#define CE_x86_64
-	#endif
+#ifndef CE_x86_64
+#define CE_x86_64
+#endif
 #elif defined(__arm__) || defined(_M_ARM)
-	#ifndef CE_ARM
-		#define CE_ARM
-	#endif
+#ifndef CE_ARM
+#define CE_ARM
+#endif
 #else
-	#ifndef CE_NARCH
-		#define CE_NARCH
-	#endif
+#ifndef CE_NARCH
+#define CE_NARCH
+#endif
 #endif
 
 #endif // CE_MACROS_H
-
-#ifndef CEI2C_H
-#define CEI2C_H
 
 #ifdef CE_LINUX
     #include <unistd.h>
