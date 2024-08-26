@@ -9,10 +9,10 @@
 #ifndef CECONFIG_H
 #define CECONFIG_H
 
+#define CE_JSON 1 // include JSON
+
 #ifndef CE_MACROS_H
 	#define CE_MACROS_H
-
-	#define CE_JSON 1 // include JSON
 
 	#if defined(_WIN64) || defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__WINDOWS__) || defined(__TOS_WIN__) || defined(__CYGWIN__)
 		#ifndef CE_WINDOWS

@@ -7,10 +7,10 @@
 #ifndef CEMISC_H
 #define CEMISC_H
 
+#define CE_DBG_PRINT 0 // print dbg mes
+
 #ifndef CE_MACROS_H
 #define CE_MACROS_H
-
-#define CE_DBG_PRINT 0 // print dbg mes
 
 #if defined(_WIN64) || defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__WINDOWS__) || defined(__TOS_WIN__) || defined(__CYGWIN__)
 	#ifndef CE_WINDOWS
@@ -240,7 +240,7 @@ inline std::string ceMisc::exepath()
 {
 #ifdef CE_WINDOWS
 	char result[MAX_PATH];
-	return std::string(result, GetModuleFileName(NULL, result, MAX_PATH));
+	return std::string(result, GetModuleFileNameA(NULL, result, MAX_PATH));
 #else
 	char result[PATH_MAX];
 	ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
