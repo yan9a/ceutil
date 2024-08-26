@@ -240,7 +240,7 @@ inline std::string ceMisc::exepath()
 {
 #ifdef CE_WINDOWS
 	char result[MAX_PATH];
-	return std::string(result, GetModuleFileName(NULL, result, MAX_PATH));
+	return std::string(result, GetModuleFileNameA(NULL, result, MAX_PATH));
 #else
 	char result[PATH_MAX];
 	ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
