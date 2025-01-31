@@ -143,7 +143,7 @@ void ceLog::Clean(string path,string extension,double expiry_seconds)
                 fpath=path+fn;
                 this->m_ft.SetJD(LastModified(fpath));
                 #if ceLog_PRINT ==1
-                printf("Modified time: %s \n",m_ft.DateTimeString().c_str());
+                printf("Modified time: %s \n",m_ft.ToString("%yyyy-%mm-%dd %HH:%nn:%ss").c_str());
                 #endif
                 fileage=(this->m_dt.jd()-this->m_ft.jd())*86400.0;
                 if(fileage>expiry_seconds){
@@ -213,8 +213,8 @@ double ceLog::LastModified(const string& name)
     {
         fmt = localtime(&(attrib.st_mtime));
         dt.SetDateTime(fmt->tm_year+1900,fmt->tm_mon+1,fmt->tm_mday,
-            fmt->tm_hour,fmt->tm_min,fmt->tm_sec);
-        // printf("Modified time: %s \n",dt.DateTimeString().c_str());
+            fmt->tm_hour,fmt->tm_min,fmt->tm_sec,dt.tz());
+        // printf("Modified time: %s \n",dt.ToString("%yyyy-%mm-%dd %HH:%nn:%ss").c_str());
     }
     else{
         // printf("Error in using stat.\n");
