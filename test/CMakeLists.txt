@@ -15,3 +15,6 @@ add_test(NAME testJson COMMAND testJson)
 
 # add_subdirectory(testRSA_OS)
 # add_test(NAME testRSA_OS COMMAND testRSA_OS)
+
+# add_subdirectory(testLog)
+# add_test(NAME testLog COMMAND testLog)
