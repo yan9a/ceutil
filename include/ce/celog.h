@@ -7,8 +7,6 @@
 #ifndef ceLog_H
 #define ceLog_H
 
-#define CE_DBG_PRINT 0 // print dbg mes
-
 #ifndef CE_MACROS_H
 #define CE_MACROS_H
 
@@ -49,6 +47,8 @@
 #include <sstream>
 #include <vector>
 #include "ce/cedt.h"
+#include <mutex>
+#include <filesystem>
 
 #if defined(CE_WINDOWS)
     #include <windows.h>
@@ -60,8 +60,8 @@
     #include <sys/stat.h>
 #endif
 
-#define ceLog_PRINT 0
 #define LOG_PATH "./log/"
+#define CELOG_DBG_PRINT 0 // print dbg mes
 
 namespace ce {
 class ceLog{
@@ -71,6 +71,8 @@ class ceLog{
 	double m_expiry_days;
 	std::string m_extension;
 	bool m_enPrintf;
+    std::mutex _mtxLog;
+    uint8_t _log_level;
 public:
     ceLog();
 	ceLog(std::string path,double expdays);
@@ -92,6 +94,12 @@ public:
 	int Print(std::string mes); // write to file and echo on std output
 	bool GetEnPrintf();
 	void SetEnPrintf(bool en);
+    void SetLogLevel(uint8_t l);
+    uint8_t GetLogLevel();
+    int Print(uint8_t level, std::string mes); // write to file and echo on std output if level is smaller than or equal to _log_level
+    int Info(std::string mes); // write to file and echo on std output with log level 0
+    int Debug(std::string mes); // write to file and echo on std output with log level 1
+    int ChkDir(std::string path); // check if the log dir exists, mkdir if it doesn't exist
 };
 
 /////////////////////////////////////////////////////////////////////////////
@@ -103,6 +111,8 @@ inline ceLog::ceLog()
     SetExpiry(30);
     SetExtension(".log");
     SetEnPrintf(false);
+    SetLogLevel(0);
+    ChkDir(LOG_PATH);
 }
 
 inline ceLog::ceLog(std::string path, double expdays)
@@ -111,6 +121,8 @@ inline ceLog::ceLog(std::string path, double expdays)
     SetExpiry(expdays);
     SetExtension(".log");
     SetEnPrintf(true);
+    SetLogLevel(0);
+    ChkDir(path);
 }
 
 inline void ceLog::SetPath(std::string path)
@@ -173,12 +185,23 @@ inline double ceLog::GetTimezone()//get time zone
     return this->m_dt.tz();
 }
 
+inline void ceLog::SetLogLevel(uint8_t l)//set local time zone
+{
+    this->_log_level = l;
+}
+
+inline uint8_t ceLog::GetLogLevel()//get time zone
+{
+    return this->_log_level;
+}
+
 inline int ceLog::Write(std::string mes)
 {
     std::ofstream wfile;
     int r = -1;
     this->m_dt.Set2Now();
     std::string logpath = this->m_path + "L" + this->m_dt.ToString("%yyyy-%mm-%dd") + ".log";
+    _mtxLog.lock();
     try {
         wfile.open(logpath.c_str(), std::fstream::out | std::fstream::app);
         if (wfile.is_open()) {
@@ -190,6 +213,7 @@ inline int ceLog::Write(std::string mes)
     catch (...) {
         perror("ceLog error in writing");
     }
+    _mtxLog.unlock();
     return r;
 }
 
@@ -200,6 +224,25 @@ inline int ceLog::Print(std::string mes)
         std::cout << mes << std::endl;
     }
     return Write(mes);
+}
+
+// write to file and echo on std output if level is smaller than or equal to _log_level
+inline int ceLog::Print(uint8_t level, std::string mes)
+{
+    if (level <= (this->_log_level)) {
+        return this->Print(mes);
+    }
+    return 0;
+}
+
+// write to file and echo on std output with log level 0
+inline int ceLog::Info(std::string mes) {
+    return this->Print(0, mes);
+} 
+
+// write to file and echo on std output with log level 1
+inline int ceLog::Debug(std::string mes) {
+    return this->Print(1, mes);
 }
 
 inline void ceLog::Clean(std::string path, std::string extension, double expiry_seconds)
@@ -213,7 +256,7 @@ inline void ceLog::Clean(std::string path, std::string extension, double expiry_
     try {
         ReadDir(path, filenames);
         int nfiles = (int)filenames.size();
-#if ceLog_PRINT == 1
+#if CELOG_DBG_PRINT == 1
         printf("Number of items: %d \n", nfiles);
 #endif
 
@@ -224,20 +267,20 @@ inline void ceLog::Clean(std::string path, std::string extension, double expiry_
 
         for (int i = 0; i < nfiles; i++) {
             fn = filenames.at(i);
-#if ceLog_PRINT == 1
+#if CELOG_DBG_PRINT == 1
             printf("File name: %s \n", fn.c_str());
 #endif
             pos = (int)fn.find(extension);
             if (pos >= 0) {
                 fpath = path + fn;
                 this->m_ft.SetJD(LastModified(fpath));
-#if ceLog_PRINT ==1
-                printf("Modified time: %s \n", m_ft.DateTimeString().c_str());
+#if CELOG_DBG_PRINT ==1
+                printf("Modified time: %s \n", m_ft.ToString("%yyyy-%mm-%dd %HH:%nn:%ss").c_str());
 #endif
                 fileage = (this->m_dt.jd() - this->m_ft.jd()) * 86400.0;
                 if (fileage > expiry_seconds) {
                     remove(fpath.c_str());
-#if ceLog_PRINT == 1
+#if CELOG_DBG_PRINT == 1
                     printf("%s has been deleted \n", fpath.c_str());
                     //this->Write("Deleted "+fp);
 #endif
@@ -302,13 +345,46 @@ inline double ceLog::LastModified(const std::string& name)
     {
         fmt = localtime(&(attrib.st_mtime));
         dt.SetDateTime(fmt->tm_year + 1900, fmt->tm_mon + 1, fmt->tm_mday,
-            fmt->tm_hour, fmt->tm_min, fmt->tm_sec);
-        // printf("Modified time: %s \n",dt.DateTimeString().c_str());
+            fmt->tm_hour, fmt->tm_min, fmt->tm_sec,dt.tz());
+#if CELOG_DBG_PRINT == 1
+        printf("Year: %d\n", (fmt->tm_year + 1900));
+        printf("Month: %d\n", (fmt->tm_mon+1));
+        printf("MDay: %d\n", fmt->tm_mday);
+        printf("Hour: %d\n", fmt->tm_hour);
+        printf("Min: %d\n", fmt->tm_min);
+        printf("Sec: %d\n", fmt->tm_sec );
+        printf("Modified time: %s \n",dt.ToString("%yyyy-%mm-%dd %HH:%nn:%ss").c_str());
+#endif
     }
     else {
         // printf("Error in using stat.\n");
     }
     return dt.jd();
+}
+
+inline int ceLog::ChkDir(std::string path) {
+    int r = -1;
+    if (std::filesystem::exists(path)) {
+        if (std::filesystem::is_regular_file(path)) {
+            perror("ceLog error: path should be a dir, not a file\n");
+        }
+        else if (std::filesystem::is_directory(path)) {
+            r = 0;
+        }
+        else {
+            perror("ceLog error: path is not a dir\n");            
+        }
+    }
+    else {
+        // Directory does not exist, so create it
+        if (std::filesystem::create_directory(path)) {
+            printf("ceLog: Directory %s created successfully.\n",path.c_str());
+            r = 1;
+        } else {
+            perror("ceLog error: fail to create dir\n");   
+        }
+    }
+    return r;
 }
 
 /////////////////////////////////////////////////////////////////////////////
